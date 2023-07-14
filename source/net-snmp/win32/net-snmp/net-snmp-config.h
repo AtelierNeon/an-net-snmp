@@ -1660,6 +1660,8 @@ typedef __int64 intmax_t;
 #ifndef _INTPTR_T_DEFINED
 #ifdef _M_X64
 typedef __int64          intptr_t;
+#elif _M_ARM64
+typedef __int64          intptr_t;
 #else
 typedef int              intptr_t;
 #endif
@@ -1668,6 +1670,8 @@ typedef int              intptr_t;
 
 #ifndef _UINTPTR_T_DEFINED
 #ifdef _M_X64
+typedef unsigned __int64 uintptr_t;
+#elif _M_ARM64
 typedef unsigned __int64 uintptr_t;
 #else
 typedef unsigned int     uintptr_t;
@@ -1742,8 +1746,8 @@ enum {
 
 /* MSVC OpenSSL linker settings. */
 #if defined(_MSC_VER)
-#  if defined(NETSNMP_USE_OPENSSL)
-#    ifdef _DLL
+#  if defined(NETSNMP_USE_OPENSSL) && !defined(NETSNMP_USE_SIBLING_OPENSSL)
+#    if defined(_DLL)
 #      ifdef _DEBUG
 #        ifdef OPENSSL_BEFORE_1_1_0
 #          pragma comment(lib, "libeay32MDd.lib")
