@@ -50,15 +50,23 @@ include_directories( BEFORE SYSTEM
 
 if( WIN32 )
   list( APPEND E_SRC win32_init.c )
-endif()
+  include( Windows-MyExeVersion )
+  generate_product_exe_version( OPENSSL_APP_VERSION_FILES
+    NAME "openssl - OpenSSL command line program"
+    BUNDLE "${PROJECT_DESCRIPTION}"
+    ICON ${PROJECT_SOURCE_DIR}/openssl.ico
+    VERSION_MAJOR ${OPENSSL_VERSION_MAJOR}
+    VERSION_MINOR ${OPENSSL_VERSION_MINOR}
+    VERSION_PATCH ${OPENSSL_VERSION_FIX}
+    VERSION_REVISION ${MY_REVISION}
+    ORIGINAL_FILENAME "openssl.exe"
+  )
+  set( E_SRC ${E_SRC} ${OPENSSL_APP_VERSION_FILES} )
+endif ()
 
 add_executable( openssl ${E_SRC} )
 
 target_link_libraries( openssl crypto ssl )
-
-if( WIN32 )
-  target_link_libraries( openssl advapi32 )
-endif()
 
 if( ${CMAKE_SYSTEM_NAME} STREQUAL "SunOS" )
   find_library( SOCKET socket REQUIRED )

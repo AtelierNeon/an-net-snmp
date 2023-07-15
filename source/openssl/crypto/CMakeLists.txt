@@ -67,6 +67,12 @@ include_directories( BEFORE SYSTEM
   ${PROJECT_BINARY_DIR}/include # public|crypto|internal
   ${PROJECT_SOURCE_DIR}/ # e_os.h
 )
+if( OPENSSL_WITH_ZLIB )
+  include_directories(
+    ${PROJECT_SOURCE_DIR}/../zlib/
+    ${PROJECT_BINARY_DIR}/../zlib/
+  )
+endif()
 
 if( BUILD_SHARED_LIBS )
   add_definitions( -DOPENSSL_BUILD_SHLIBCRYPTO )
@@ -119,7 +125,7 @@ add_submodule ( blake2 blake2b.c blake2s.c m_blake2b.c m_blake2s.c )
 add_submodule ( bn bn_add.c bn_asm.c bn_blind.c bn_const.c bn_ctx.c bn_depr.c bn_dh.c
   bn_div.c bn_err.c bn_exp.c bn_exp2.c bn_gcd.c bn_gf2m.c bn_intern.c bn_kron.c bn_lib.c
   bn_mod.c bn_mont.c bn_mpi.c bn_mul.c bn_nist.c bn_prime.c bn_print.c bn_rand.c bn_recp.c
-  bn_shift.c bn_sqr.c bn_sqrt.c bn_srp.c bn_word.c bn_x931p.c rsaz_exp.c rsa_sup_mul.c )
+  bn_shift.c bn_sqr.c bn_sqrt.c bn_srp.c bn_word.c bn_x931p.c rsaz_exp.c )
 
 add_submodule ( buffer buf_err.c buffer.c )
 
@@ -278,18 +284,40 @@ else()
   add_submodule ( . threads_pthread.c )
 endif()
 
+if( WIN32 )
+  include( Windows-MyDllVersion )
+  generate_product_dll_version( OPENSSL_CRYPTO_VERSION_FILES
+    NAME "libcrypto - OpenSSL cryptographic library"
+    BUNDLE "${PROJECT_DESCRIPTION}"
+    VERSION_MAJOR ${OPENSSL_VERSION_MAJOR}
+    VERSION_MINOR ${OPENSSL_VERSION_MINOR}
+    VERSION_PATCH ${OPENSSL_VERSION_FIX}
+    VERSION_REVISION ${MY_REVISION}
+    ORIGINAL_FILENAME "libcrypto-1_1.dll"
+  )
+  set( LIBSRC ${LIBSRC} ${OPENSSL_CRYPTO_VERSION_FILES} )
+endif()
+
 add_library( crypto ${LIBSRC} ${OBJECTS_SRC} )
 
 target_include_directories( crypto PUBLIC ${PROJECT_BINARY_DIR}/include )
 
 if( WIN32 AND NOT CYGWIN )
-  target_link_libraries( crypto ws2_32 crypt32 )
+  target_link_libraries( crypto ws2_32 crypt32 advapi32 )
 else()
   if( Threads_FOUND )
     target_link_libraries( crypto ${CMAKE_THREAD_LIBS_INIT} )
   endif()
   if( DSO_DLFCN AND HAVE_DLFCN_H )
     target_link_libraries( crypto dl )
+  endif()
+endif()
+
+if( OPENSSL_WITH_ZLIB )
+  if( OPENSSL_WITH_SHARED_ZLIB )
+    target_link_libraries( crypto zlib )
+  else()
+    target_link_libraries( crypto zlibstatic )
   endif()
 endif()
 
@@ -302,7 +330,7 @@ endif()
 
 if( MSVC )
   if( CMAKE_SIZEOF_VOID_P EQUAL 8 )
-    set_target_properties( crypto PROPERTIES OUTPUT_NAME "crypto-1_1-x64" )
+    set_target_properties( crypto PROPERTIES OUTPUT_NAME "crypto-1_1" )
   elseif( CMAKE_SIZEOF_VOID_P EQUAL 4 )
     set_target_properties( crypto PROPERTIES OUTPUT_NAME "crypto-1_1" )
   endif()
