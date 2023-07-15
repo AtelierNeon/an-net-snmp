@@ -5,11 +5,11 @@ endif ()
 
 ## Add include directories
 include_directories (
-    ${netsnmp_SOURCE_DIR}/agent/mibgroup
-    ${netsnmp_SOURCE_DIR}/include)
+    ${PROJECT_SOURCE_DIR}/agent/mibgroup
+    ${PROJECT_SOURCE_DIR}/include)
 if (WIN32)
     include_directories (
-        ${netsnmp_SOURCE_DIR}/win32)
+        ${PROJECT_SOURCE_DIR}/win32)
 endif ()
 
 ## Component - libnetsnmptrapd
@@ -39,7 +39,7 @@ if (WIN32)
     generate_product_exe_version (NETSNMP_ENCODE_KEYCHANGE_VERSION_FILES
         NAME "${NETSNMP_ENCODE_KEYCHANGE_NAME} - produce the KeyChange string for SNMPv3"
         BUNDLE "${PROJECT_DESCRIPTION}"
-        ICON "${netsnmp_SOURCE_DIR}/net-snmp.ico"
+        ICON "${PROJECT_SOURCE_DIR}/net-snmp.ico"
         VERSION_MAJOR ${NETSNMP_VER_MAJOR}
         VERSION_MINOR ${NETSNMP_VER_MINOR}
         VERSION_PATCH ${NETSNMP_VER_PATCH}
@@ -64,7 +64,7 @@ if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPBULKGET_VERSION_FILES
         NAME "${NETSNMP_SNMPBULKGET_NAME} - communicates with a network entity using SNMP GETBULK requests"
         BUNDLE "${PROJECT_DESCRIPTION}"
-        ICON "${netsnmp_SOURCE_DIR}/net-snmp.ico"
+        ICON "${PROJECT_SOURCE_DIR}/net-snmp.ico"
         VERSION_MAJOR ${NETSNMP_VER_MAJOR}
         VERSION_MINOR ${NETSNMP_VER_MINOR}
         VERSION_PATCH ${NETSNMP_VER_PATCH}
@@ -89,7 +89,7 @@ if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPBULKWALK_VERSION_FILES
         NAME "${NETSNMP_SNMPBULKWALK_NAME} - retrieve a subtree of management values using SNMP GETBULK requests"
         BUNDLE "${PROJECT_DESCRIPTION}"
-        ICON "${netsnmp_SOURCE_DIR}/net-snmp.ico"
+        ICON "${PROJECT_SOURCE_DIR}/net-snmp.ico"
         VERSION_MAJOR ${NETSNMP_VER_MAJOR}
         VERSION_MINOR ${NETSNMP_VER_MINOR}
         VERSION_PATCH ${NETSNMP_VER_PATCH}
@@ -119,7 +119,7 @@ if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPD_VERSION_FILES
         NAME "${NETSNMP_SNMPD_NAME} - daemon to respond to SNMP request packets"
         BUNDLE "${PROJECT_DESCRIPTION}"
-        ICON "${netsnmp_SOURCE_DIR}/net-snmp.ico"
+        ICON "${PROJECT_SOURCE_DIR}/net-snmp.ico"
         VERSION_MAJOR ${NETSNMP_VER_MAJOR}
         VERSION_MINOR ${NETSNMP_VER_MINOR}
         VERSION_PATCH ${NETSNMP_VER_PATCH}
@@ -144,7 +144,7 @@ if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPDELTA_VERSION_FILES
         NAME "${NETSNMP_SNMPDELTA_NAME} - Monitor delta differences in SNMP Counter values"
         BUNDLE "${PROJECT_DESCRIPTION}"
-        ICON "${netsnmp_SOURCE_DIR}/net-snmp.ico"
+        ICON "${PROJECT_SOURCE_DIR}/net-snmp.ico"
         VERSION_MAJOR ${NETSNMP_VER_MAJOR}
         VERSION_MINOR ${NETSNMP_VER_MINOR}
         VERSION_PATCH ${NETSNMP_VER_PATCH}
@@ -169,7 +169,7 @@ if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPDF_VERSION_FILES
         NAME "${NETSNMP_SNMPDF_NAME} - display disk space usage on a network entity via SNMP"
         BUNDLE "${PROJECT_DESCRIPTION}"
-        ICON "${netsnmp_SOURCE_DIR}/net-snmp.ico"
+        ICON "${PROJECT_SOURCE_DIR}/net-snmp.ico"
         VERSION_MAJOR ${NETSNMP_VER_MAJOR}
         VERSION_MINOR ${NETSNMP_VER_MINOR}
         VERSION_PATCH ${NETSNMP_VER_PATCH}
@@ -194,7 +194,7 @@ if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPGET_VERSION_FILES
         NAME "${NETSNMP_SNMPGET_NAME} - communicates with a network entity using SNMP GET requests"
         BUNDLE "${PROJECT_DESCRIPTION}"
-        ICON "${netsnmp_SOURCE_DIR}/net-snmp.ico"
+        ICON "${PROJECT_SOURCE_DIR}/net-snmp.ico"
         VERSION_MAJOR ${NETSNMP_VER_MAJOR}
         VERSION_MINOR ${NETSNMP_VER_MINOR}
         VERSION_PATCH ${NETSNMP_VER_PATCH}
@@ -219,7 +219,7 @@ if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPGETNEXT_VERSION_FILES
         NAME "${NETSNMP_SNMPGETNEXT_NAME} - communicates with a network entity using SNMP GETNEXT requests"
         BUNDLE "${PROJECT_DESCRIPTION}"
-        ICON "${netsnmp_SOURCE_DIR}/net-snmp.ico"
+        ICON "${PROJECT_SOURCE_DIR}/net-snmp.ico"
         VERSION_MAJOR ${NETSNMP_VER_MAJOR}
         VERSION_MINOR ${NETSNMP_VER_MINOR}
         VERSION_PATCH ${NETSNMP_VER_PATCH}
@@ -252,7 +252,7 @@ if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPNETSTAT_VERSION_FILES
         NAME "${NETSNMP_SNMPNETSTAT_NAME} - display networking status and configuration information from a network entity via SNMP"
         BUNDLE "${PROJECT_DESCRIPTION}"
-        ICON "${netsnmp_SOURCE_DIR}/net-snmp.ico"
+        ICON "${PROJECT_SOURCE_DIR}/net-snmp.ico"
         VERSION_MAJOR ${NETSNMP_VER_MAJOR}
         VERSION_MINOR ${NETSNMP_VER_MINOR}
         VERSION_PATCH ${NETSNMP_VER_PATCH}
@@ -277,7 +277,7 @@ if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPSET_VERSION_FILES
         NAME "${NETSNMP_SNMPSET_NAME} - communicates with a network entity using SNMP SET requests"
         BUNDLE "${PROJECT_DESCRIPTION}"
-        ICON "${netsnmp_SOURCE_DIR}/net-snmp.ico"
+        ICON "${PROJECT_SOURCE_DIR}/net-snmp.ico"
         VERSION_MAJOR ${NETSNMP_VER_MAJOR}
         VERSION_MINOR ${NETSNMP_VER_MINOR}
         VERSION_PATCH ${NETSNMP_VER_PATCH}
@@ -302,7 +302,7 @@ if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPSTATUS_VERSION_FILES
         NAME "${NETSNMP_SNMPSTATUS_NAME} - retrieves a fixed set of management information from a network entity"
         BUNDLE "${PROJECT_DESCRIPTION}"
-        ICON "${netsnmp_SOURCE_DIR}/net-snmp.ico"
+        ICON "${PROJECT_SOURCE_DIR}/net-snmp.ico"
         VERSION_MAJOR ${NETSNMP_VER_MAJOR}
         VERSION_MINOR ${NETSNMP_VER_MINOR}
         VERSION_PATCH ${NETSNMP_VER_PATCH}
@@ -327,7 +327,7 @@ if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPTABLE_VERSION_FILES
         NAME "${NETSNMP_SNMPTABLE_NAME} - retrieve an SNMP table and display it in tabular form"
         BUNDLE "${PROJECT_DESCRIPTION}"
-        ICON "${netsnmp_SOURCE_DIR}/net-snmp.ico"
+        ICON "${PROJECT_SOURCE_DIR}/net-snmp.ico"
         VERSION_MAJOR ${NETSNMP_VER_MAJOR}
         VERSION_MINOR ${NETSNMP_VER_MINOR}
         VERSION_PATCH ${NETSNMP_VER_PATCH}
@@ -352,7 +352,7 @@ if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPTEST_VERSION_FILES
         NAME "${NETSNMP_SNMPTEST_NAME} - communicates with a network entity using SNMP requests"
         BUNDLE "${PROJECT_DESCRIPTION}"
-        ICON "${netsnmp_SOURCE_DIR}/net-snmp.ico"
+        ICON "${PROJECT_SOURCE_DIR}/net-snmp.ico"
         VERSION_MAJOR ${NETSNMP_VER_MAJOR}
         VERSION_MINOR ${NETSNMP_VER_MINOR}
         VERSION_PATCH ${NETSNMP_VER_PATCH}
@@ -377,7 +377,7 @@ if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPTRANSLATE_VERSION_FILES
         NAME "${NETSNMP_SNMPTRANSLATE_NAME} - translate MIB OID names between numeric and textual forms"
         BUNDLE "${PROJECT_DESCRIPTION}"
-        ICON "${netsnmp_SOURCE_DIR}/net-snmp.ico"
+        ICON "${PROJECT_SOURCE_DIR}/net-snmp.ico"
         VERSION_MAJOR ${NETSNMP_VER_MAJOR}
         VERSION_MINOR ${NETSNMP_VER_MINOR}
         VERSION_PATCH ${NETSNMP_VER_PATCH}
@@ -402,7 +402,7 @@ if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPTRAP_VERSION_FILES
         NAME "${NETSNMP_SNMPTRAP_NAME} - sends an SNMP notification to a manager"
         BUNDLE "${PROJECT_DESCRIPTION}"
-        ICON "${netsnmp_SOURCE_DIR}/net-snmp.ico"
+        ICON "${PROJECT_SOURCE_DIR}/net-snmp.ico"
         VERSION_MAJOR ${NETSNMP_VER_MAJOR}
         VERSION_MINOR ${NETSNMP_VER_MINOR}
         VERSION_PATCH ${NETSNMP_VER_PATCH}
@@ -433,7 +433,7 @@ if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPTRAPD_VERSION_FILES
         NAME "${NETSNMP_SNMPTRAPD_NAME} - receive and log SNMP trap messages"
         BUNDLE "${PROJECT_DESCRIPTION}"
-        ICON "${netsnmp_SOURCE_DIR}/net-snmp.ico"
+        ICON "${PROJECT_SOURCE_DIR}/net-snmp.ico"
         VERSION_MAJOR ${NETSNMP_VER_MAJOR}
         VERSION_MINOR ${NETSNMP_VER_MINOR}
         VERSION_PATCH ${NETSNMP_VER_PATCH}
@@ -458,7 +458,7 @@ if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPUSM_VERSION_FILES
         NAME "${NETSNMP_SNMPUSM_NAME} - creates and maintains SNMPv3 users on a network entity"
         BUNDLE "${PROJECT_DESCRIPTION}"
-        ICON "${netsnmp_SOURCE_DIR}/net-snmp.ico"
+        ICON "${PROJECT_SOURCE_DIR}/net-snmp.ico"
         VERSION_MAJOR ${NETSNMP_VER_MAJOR}
         VERSION_MINOR ${NETSNMP_VER_MINOR}
         VERSION_PATCH ${NETSNMP_VER_PATCH}
@@ -483,7 +483,7 @@ if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPVACM_VERSION_FILES
         NAME "${NETSNMP_SNMPVACM_NAME} - creates and maintains SNMPv3 View-based Access Control entries on a network entity"
         BUNDLE "${PROJECT_DESCRIPTION}"
-        ICON "${netsnmp_SOURCE_DIR}/net-snmp.ico"
+        ICON "${PROJECT_SOURCE_DIR}/net-snmp.ico"
         VERSION_MAJOR ${NETSNMP_VER_MAJOR}
         VERSION_MINOR ${NETSNMP_VER_MINOR}
         VERSION_PATCH ${NETSNMP_VER_PATCH}
@@ -508,7 +508,7 @@ if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPWALK_VERSION_FILES
         NAME "${NETSNMP_SNMPWALK_NAME} - retrieve a subtree of management values using SNMP GETNEXT requests"
         BUNDLE "${PROJECT_DESCRIPTION}"
-        ICON "${netsnmp_SOURCE_DIR}/net-snmp.ico"
+        ICON "${PROJECT_SOURCE_DIR}/net-snmp.ico"
         VERSION_MAJOR ${NETSNMP_VER_MAJOR}
         VERSION_MINOR ${NETSNMP_VER_MINOR}
         VERSION_PATCH ${NETSNMP_VER_PATCH}

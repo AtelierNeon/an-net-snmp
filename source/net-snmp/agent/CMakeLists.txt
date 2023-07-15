@@ -1,10 +1,10 @@
 ## Add include directories
 include_directories (
-    ${netsnmp_SOURCE_DIR}/agent/mibgroup
-    ${netsnmp_SOURCE_DIR}/include)
+    ${PROJECT_SOURCE_DIR}/agent/mibgroup
+    ${PROJECT_SOURCE_DIR}/include)
 if (WIN32)
     include_directories (
-        ${netsnmp_SOURCE_DIR}/win32)
+        ${PROJECT_SOURCE_DIR}/win32)
 endif ()
 
 ## Component - libnetsnmpagent

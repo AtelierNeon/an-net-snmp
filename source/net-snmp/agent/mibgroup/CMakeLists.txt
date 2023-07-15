@@ -1,6 +1,6 @@
 ## Add include directories
 include_directories (
-    ${netsnmp_SOURCE_DIR}/agent)
+    ${PROJECT_SOURCE_DIR}/agent)
 
 ## Component - libnetsnmpmibs
 set (NETSNMP_NETSNMPMIBSLIB_NAME

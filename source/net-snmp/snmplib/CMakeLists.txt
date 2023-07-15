@@ -5,11 +5,11 @@ endif ()
 
 ## Add include directories
 include_directories (
-    ${netsnmp_SOURCE_DIR}/include
-    ${netsnmp_SOURCE_DIR}/snmplib)
+    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/snmplib)
 if (WIN32)
     include_directories (
-        ${netsnmp_SOURCE_DIR}/win32)
+        ${PROJECT_SOURCE_DIR}/win32)
 endif ()
 if (NETSNMP_WITH_SSL)
     include_directories (
