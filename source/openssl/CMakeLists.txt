@@ -116,11 +116,16 @@ add_definitions( -DOPENSSL_NO_STATIC_ENGINE )
 if( MSVC )
   include( MSVCRuntime )
   configure_msvc_runtime()
-  set( OPENSSLDIR "C:/ssl" )
-  set( ENGINESDIR "C:/engines-1.1" )
+  set( OPENSSLDIR "C:/ProgramData/openssl/ssl" )
+  set( ENGINESDIR "C:/ProgramData/openssl/engines-1.1" )
 else()
-  set( OPENSSLDIR "${CMAKE_INSTALL_PREFIX}/ssl" )
-  set( ENGINESDIR "${CMAKE_INSTALL_PREFIX}/engines-1.1" )
+  if( DEFINED MY_LIB_BASE_PATH )
+    set( OPENSSLDIR "${MY_LIB_BASE_PATH}/ssl" )
+    set( ENGINESDIR "${MY_LIB_BASE_PATH}/engines-1.1" )
+  else()
+    set( OPENSSLDIR "${CMAKE_INSTALL_PREFIX}/ssl" )
+    set( ENGINESDIR "${CMAKE_INSTALL_PREFIX}/engines-1.1" )
+  endif()
 endif()
 add_definitions( "-DOPENSSLDIR=\"${OPENSSLDIR}\"" )
 add_definitions( "-DENGINESDIR=\"${ENGINESDIR}\"" )
@@ -173,8 +178,6 @@ file( COPY ${PROJECT_SOURCE_DIR}/include/openssl DESTINATION include )
 
 file( READ ${PROJECT_SOURCE_DIR}/opensslconf.h.cmake CONF )
 set( CONF "
-#define OPENSSL_NO_MD2
-#define OPENSSL_NO_RC5
 #define OPENSSL_NO_RFC3779
 #define OPENSSL_NO_EC_NISTP_64_GCC_128
 ${CONF}" )
