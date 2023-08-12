@@ -182,6 +182,24 @@ else ()
     set (NETSNMP_PRIz "")
 endif ()
 
+configure_file (${PROJECT_SOURCE_DIR}/include/agent_module_dot_conf.h.cmake
+    ${PROJECT_BINARY_DIR}/include/agent_module_dot_conf.h )
+configure_file (${PROJECT_SOURCE_DIR}/include/agent_module_includes.h.cmake
+    ${PROJECT_BINARY_DIR}/include/agent_module_includes.h )
+configure_file (${PROJECT_SOURCE_DIR}/include/agent_module_inits.h.cmake
+    ${PROJECT_BINARY_DIR}/include/agent_module_inits.h )
+configure_file (${PROJECT_SOURCE_DIR}/include/mib_module_dot_conf.h.cmake
+    ${PROJECT_BINARY_DIR}/include/mib_module_dot_conf.h )
+configure_file (${PROJECT_SOURCE_DIR}/include/mib_module_includes.h.cmake
+    ${PROJECT_BINARY_DIR}/include/mib_module_includes.h )
+configure_file (${PROJECT_SOURCE_DIR}/include/mib_module_inits.h.cmake
+    ${PROJECT_BINARY_DIR}/include/mib_module_inits.h )
+configure_file (${PROJECT_SOURCE_DIR}/include/mib_module_shutdown.h.cmake
+    ${PROJECT_BINARY_DIR}/include/mib_module_shutdown.h )
+configure_file (${PROJECT_SOURCE_DIR}/include/snmpsm_init.h.cmake
+    ${PROJECT_BINARY_DIR}/include/snmpsm_init.h )
+configure_file (${PROJECT_SOURCE_DIR}/include/snmpsm_shutdown.h.cmake
+    ${PROJECT_BINARY_DIR}/include/snmpsm_shutdown.h )
 configure_file (${PROJECT_SOURCE_DIR}/include/net-snmp/net-snmp-config.h.cmake
     ${PROJECT_BINARY_DIR}/include/net-snmp/net-snmp-config.h )
 configure_file (${PROJECT_SOURCE_DIR}/include/net-snmp/agent/agent_module_config.h.cmake
@@ -190,6 +208,8 @@ configure_file (${PROJECT_SOURCE_DIR}/include/net-snmp/agent/mib_module_config.h
     ${PROJECT_BINARY_DIR}/include/net-snmp/agent/mib_module_config.h )
 configure_file (${PROJECT_SOURCE_DIR}/include/net-snmp/library/snmpv3-security-includes.h.cmake
     ${PROJECT_BINARY_DIR}/include/net-snmp/library/snmpv3-security-includes.h )
+configure_file (${PROJECT_SOURCE_DIR}/include/transports/snmp_transport_inits.h.cmake
+    ${PROJECT_BINARY_DIR}/include/transports/snmp_transport_inits.h )
 
 ## Process sub-components
 add_subdirectory (agent)
