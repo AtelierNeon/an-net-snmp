@@ -32,6 +32,7 @@ set (NETSNMP_NETSNMPMIBSLIB_SRCS
     disman/event/mteTriggerThresholdTable.c
     examples/example.c
     examples/ucdDemoPublic.c
+    ucd-snmp/disk.c
     ucd-snmp/dlmod.c
     ucd-snmp/errormib.c
     ucd-snmp/extensible.c
@@ -82,6 +83,15 @@ set (NETSNMP_NETSNMPMIBSLIB_SRCS
     util_funcs/header_generic.c
     util_funcs/header_simple_table.c
     header_complex.c
+    ../helpers/baby_steps.c
+    ../helpers/instance.c
+    ../helpers/scalar.c
+    ../helpers/scalar_group.c
+    ../helpers/snmp_get_statistic.c
+    ../helpers/table_container.c
+    ../helpers/table_iterator.c
+    ../helpers/table_tdata.c
+    ../helpers/watcher.c
     ../mib_modules.c
     util_funcs.c
     util_funcs/Exit.c
@@ -115,5 +125,7 @@ set (NETSNMP_NETSNMPMIBSLIB_LIBTYPE
     STATIC)
 add_library (${NETSNMP_NETSNMPMIBSLIB_NAME} ${NETSNMP_NETSNMPMIBSLIB_LIBTYPE}
     ${NETSNMP_NETSNMPMIBSLIB_SRCS})
+set_target_properties(${NETSNMP_NETSNMPMIBSLIB_NAME}
+    PROPERTIES PREFIX "")
 target_link_libraries (${NETSNMP_NETSNMPMIBSLIB_NAME}
     ${NETSNMP_NETSNMPMIBSLIB_LIBDEPS})

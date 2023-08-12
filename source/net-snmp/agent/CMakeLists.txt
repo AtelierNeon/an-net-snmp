@@ -1,5 +1,6 @@
 ## Add include directories
 include_directories (
+    ${PROJECT_SOURCE_DIR}/agent
     ${PROJECT_SOURCE_DIR}/agent/mibgroup
     ${PROJECT_SOURCE_DIR}/include
     ${PROJECT_BINARY_DIR}/include)
@@ -53,6 +54,8 @@ set (NETSNMP_LIBNETSNMPAGENT_LIBTYPE
     STATIC)
 add_library (${NETSNMP_LIBNETSNMPAGENT_NAME} ${NETSNMP_LIBNETSNMPAGENT_LIBTYPE}
     ${NETSNMP_LIBNETSNMPAGENT_SRCS})
+set_target_properties(${NETSNMP_LIBNETSNMPAGENT_NAME}
+    PROPERTIES PREFIX "")
 target_link_libraries (${NETSNMP_LIBNETSNMPAGENT_NAME}
     ${NETSNMP_LIBNETSNMPAGENT_LIBDEPS})
 
