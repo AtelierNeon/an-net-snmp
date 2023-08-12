@@ -5,12 +5,9 @@ endif ()
 
 ## Add include directories
 include_directories (
-    ${PROJECT_SOURCE_DIR}/agent/mibgroup
-    ${PROJECT_SOURCE_DIR}/include)
-if (WIN32)
-    include_directories (
-        ${PROJECT_SOURCE_DIR}/win32)
-endif ()
+    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_BINARY_DIR}/include
+    ${PROJECT_SOURCE_DIR}/agent/mibgroup)
 
 ## Component - libnetsnmptrapd
 set (NETSNMP_LIBNETSNMPTRAPD_NAME

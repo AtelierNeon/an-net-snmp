@@ -91,7 +91,6 @@ if (NETSNMP_WITH_SDK)
     set (NETSNMP_NETSNMPMIBSLIB_SRCS
         ${NETSNMP_NETSNMPMIBSLIB_SRCS}
         mibII/at.c
-        mibII/data_access/at_iphlpapi.c
         mibII/icmp.c
         mibII/interfaces.c
         mibII/ip.c
@@ -104,6 +103,11 @@ if (NETSNMP_WITH_SDK)
         mibII/udpTable.c
         mibII/var_route.c
         winExtDLL.c)
+    if (WIN32)
+        set (NETSNMP_NETSNMPMIBSLIB_SRCS
+            ${NETSNMP_NETSNMPMIBSLIB_SRCS}
+            mibII/data_access/at_iphlpapi.c)
+    endif ()
 endif ()
 set (NETSNMP_NETSNMPMIBSLIB_LIBDEPS
     libnetsnmp)

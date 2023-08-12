@@ -6,15 +6,11 @@ endif ()
 ## Add include directories
 include_directories (
     ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_BINARY_DIR}/include
     ${PROJECT_SOURCE_DIR}/snmplib)
-if (WIN32)
-    include_directories (
-        ${PROJECT_SOURCE_DIR}/win32)
-endif ()
 if (NETSNMP_WITH_SSL)
     include_directories (
-        ${OPENSSL_INCLUDE_DIR}
-        ${PROJECT_BINARY_DIR}/../openssl/include)
+        ${OPENSSL_INCLUDE_DIRS})
 endif ()
 
 ## Component - libnetsnmp
@@ -26,7 +22,6 @@ set (NETSNMP_LIBNETSNMP_SRCS
     callback.c
     cert_util.c
     check_varbind.c
-    closedir.c
     container.c
     container_binary_array.c
     container_iterator.c
@@ -38,7 +33,6 @@ set (NETSNMP_LIBNETSNMP_SRCS
     fd_event_manager.c
     file_utils.c
     getopt.c
-    gettimeofday.c
     inet_ntop.c
     inet_pton.c
     int64.c
@@ -49,21 +43,11 @@ set (NETSNMP_LIBNETSNMP_SRCS
     mib.c
     mt_support.c
     oid_stash.c
-    opendir.c
     parse.c
     read_config.c
-    readdir.c
     scapi.c
     snmp-tc.c
     snmp.c
-    transports/snmpCallbackDomain.c
-    transports/snmpIPv4BaseDomain.c
-    transports/snmpSocketBaseDomain.c
-    transports/snmpTCPBaseDomain.c
-    transports/snmpTCPDomain.c
-    transports/snmpUDPBaseDomain.c
-    transports/snmpUDPDomain.c
-    transports/snmpUDPIPv4BaseDomain.c
     snmp_alarm.c
     snmp_api.c
     snmp_auth.c
@@ -85,9 +69,36 @@ set (NETSNMP_LIBNETSNMP_SRCS
     strtoull.c
     system.c
     tools.c
+    #transports/snmpAAL5PVCDomain.c
+    transports/snmpAliasDomain.c
+    transports/snmpCallbackDomain.c
+    transports/snmpIPv4BaseDomain.c
+    transports/snmpSocketBaseDomain.c
+    #transports/snmpSSHDomain.c
+    transports/snmpTCPDomain.c
+    transports/snmpTCPBaseDomain.c
+    transports/snmpUDPBaseDomain.c
+    transports/snmpUDPDomain.c
+    transports/snmpUDPIPv4BaseDomain.c
+    transports/snmpUDPsharedDomain.c
     ucd_compat.c
     vacm.c
     winpipe.c)
+if (WIN32)
+    set (NETSNMP_LIBNETSNMP_SRCS
+        ${NETSNMP_LIBNETSNMP_SRCS}
+        closedir.c
+        gettimeofday.c
+        opendir.c
+        readdir.c)
+else ()
+    set (NETSNMP_LIBNETSNMP_SRCS
+        ${NETSNMP_LIBNETSNMP_SRCS}
+        sd-daemon.c
+        transports/snmpIPXDomain.c
+        transports/snmpSTDDomain.c
+        transports/snmpUnixDomain.c)
+endif ()
 set (NETSNMP_LIBNETSNMP_LIBDEPS
     "")
 set (NETSNMP_LIBNETSNMP_LIBTYPE

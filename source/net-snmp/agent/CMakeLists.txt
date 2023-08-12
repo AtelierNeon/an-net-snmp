@@ -1,11 +1,8 @@
 ## Add include directories
 include_directories (
     ${PROJECT_SOURCE_DIR}/agent/mibgroup
-    ${PROJECT_SOURCE_DIR}/include)
-if (WIN32)
-    include_directories (
-        ${PROJECT_SOURCE_DIR}/win32)
-endif ()
+    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_BINARY_DIR}/include)
 
 ## Component - libnetsnmpagent
 set (NETSNMP_LIBNETSNMPAGENT_NAME
@@ -32,9 +29,7 @@ set (NETSNMP_LIBNETSNMPAGENT_SRCS
     helpers/scalar.c
     helpers/scalar_group.c
     helpers/serialize.c
-    snmp_agent.c
     helpers/snmp_get_statistic.c
-    snmp_vars.c
     helpers/stash_cache.c
     helpers/stash_to_next.c
     helpers/table.c
@@ -44,7 +39,14 @@ set (NETSNMP_LIBNETSNMPAGENT_SRCS
     helpers/table_dataset.c
     helpers/table_iterator.c
     helpers/table_tdata.c
-    helpers/watcher.c)
+    helpers/watcher.c
+    snmp_agent.c
+    snmp_vars.c)
+if (NOT WIN32)
+    set (NETSNMP_LIBNETSNMPAGENT_SRCS
+        ${NETSNMP_LIBNETSNMPAGENT_SRCS}
+        netsnmp_close_fds.c)
+endif ()
 set (NETSNMP_LIBNETSNMPAGENT_LIBDEPS
     libnetsnmp)
 set (NETSNMP_LIBNETSNMPAGENT_LIBTYPE
