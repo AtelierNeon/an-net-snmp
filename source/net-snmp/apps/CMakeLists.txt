@@ -9,23 +9,25 @@ include_directories (
     ${PROJECT_BINARY_DIR}/include
     ${PROJECT_SOURCE_DIR}/agent/mibgroup)
 
-## Component - libnetsnmptrapd
-set (NETSNMP_LIBNETSNMPTRAPD_NAME
-    libnetsnmptrapd)
-set (NETSNMP_LIBNETSNMPTRAPD_SRCS
+## Component - netsnmptrapd
+set (NETSNMP_NETSNMPTRAPDLIB_NAME
+    netsnmptrapd)
+set (NETSNMP_NETSNMPTRAPDLIB_SRCS
     snmptrapd.c
     snmptrapd_auth.c
     snmptrapd_handlers.c
     snmptrapd_log.c
     ../snmplib/winservice.c)
-set (NETSNMP_LIBNETSNMPTRAPD_LIBDEPS
-    libnetsnmp)
-add_library (${NETSNMP_LIBNETSNMPTRAPD_NAME} STATIC
-    ${NETSNMP_LIBNETSNMPTRAPD_SRCS})
-set_target_properties(${NETSNMP_LIBNETSNMPTRAPD_NAME}
-    PROPERTIES PREFIX "")
-target_link_libraries (${NETSNMP_LIBNETSNMPTRAPD_NAME}
-    ${NETSNMP_LIBNETSNMPTRAPD_LIBDEPS})
+set (NETSNMP_NETSNMPTRAPDLIB_LIBDEPS
+    netsnmp)
+add_library (${NETSNMP_NETSNMPTRAPDLIB_NAME} STATIC
+    ${NETSNMP_NETSNMPTRAPDLIB_SRCS})
+target_link_libraries (${NETSNMP_NETSNMPTRAPDLIB_NAME}
+    ${NETSNMP_NETSNMPTRAPDLIB_LIBDEPS})
+install (TARGETS ${NETSNMP_NETSNMPTRAPDLIB_NAME}
+    RUNTIME DESTINATION bin
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib)
 
 ## Component - encode_keychange
 set (NETSNMP_ENCODE_KEYCHANGE_NAME
@@ -33,7 +35,7 @@ set (NETSNMP_ENCODE_KEYCHANGE_NAME
 set (NETSNMP_ENCODE_KEYCHANGE_SRCS
     encode_keychange.c)
 set (NETSNMP_ENCODE_KEYCHANGE_LIBDEPS
-    libnetsnmp)
+    netsnmp)
 if (WIN32)
     generate_product_exe_version (NETSNMP_ENCODE_KEYCHANGE_VERSION_FILES
         NAME "${NETSNMP_ENCODE_KEYCHANGE_NAME} - produce the KeyChange string for SNMPv3"
@@ -60,7 +62,7 @@ set (NETSNMP_SNMPBULKGET_NAME
 set (NETSNMP_SNMPBULKGET_SRCS
     snmpbulkget.c)
 set (NETSNMP_SNMPBULKGET_LIBDEPS
-    libnetsnmp)
+    netsnmp)
 if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPBULKGET_VERSION_FILES
         NAME "${NETSNMP_SNMPBULKGET_NAME} - communicates with a network entity using SNMP GETBULK requests"
@@ -87,7 +89,7 @@ set (NETSNMP_SNMPBULKWALK_NAME
 set (NETSNMP_SNMPBULKWALK_SRCS
     snmpbulkwalk.c)
 set (NETSNMP_SNMPBULKWALK_LIBDEPS
-    libnetsnmp)
+    netsnmp)
 if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPBULKWALK_VERSION_FILES
         NAME "${NETSNMP_SNMPBULKWALK_NAME} - retrieve a subtree of management values using SNMP GETBULK requests"
@@ -117,9 +119,9 @@ set (NETSNMP_SNMPD_SRCS
     ../agent/snmpd.c
     ../snmplib/winservice.c)
 set (NETSNMP_SNMPD_LIBDEPS
-    libnetsnmp
-    libnetsnmpagent
-    libnetsnmpmibs)
+    netsnmp
+    netsnmpagent
+    netsnmpmibs)
 if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPD_VERSION_FILES
         NAME "${NETSNMP_SNMPD_NAME} - daemon to respond to SNMP request packets"
@@ -146,7 +148,7 @@ set (NETSNMP_SNMPDELTA_NAME
 set (NETSNMP_SNMPDELTA_SRCS
     snmpdelta.c)
 set (NETSNMP_SNMPDELTA_LIBDEPS
-    libnetsnmp)
+    netsnmp)
 if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPDELTA_VERSION_FILES
         NAME "${NETSNMP_SNMPDELTA_NAME} - Monitor delta differences in SNMP Counter values"
@@ -173,7 +175,7 @@ set (NETSNMP_SNMPDF_NAME
 set (NETSNMP_SNMPDF_SRCS
     snmpdf.c)
 set (NETSNMP_SNMPDF_LIBDEPS
-    libnetsnmp)
+    netsnmp)
 if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPDF_VERSION_FILES
         NAME "${NETSNMP_SNMPDF_NAME} - display disk space usage on a network entity via SNMP"
@@ -200,7 +202,7 @@ set (NETSNMP_SNMPGET_NAME
 set (NETSNMP_SNMPGET_SRCS
     snmpget.c)
 set (NETSNMP_SNMPGET_LIBDEPS
-    libnetsnmp)
+    netsnmp)
 if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPGET_VERSION_FILES
         NAME "${NETSNMP_SNMPGET_NAME} - communicates with a network entity using SNMP GET requests"
@@ -227,7 +229,7 @@ set (NETSNMP_SNMPGETNEXT_NAME
 set (NETSNMP_SNMPGETNEXT_SRCS
     snmpgetnext.c)
 set (NETSNMP_SNMPGETNEXT_LIBDEPS
-    libnetsnmp)
+    netsnmp)
 if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPGETNEXT_VERSION_FILES
         NAME "${NETSNMP_SNMPGETNEXT_NAME} - communicates with a network entity using SNMP GETNEXT requests"
@@ -262,7 +264,7 @@ set (NETSNMP_SNMPNETSTAT_SRCS
     snmpnetstat/ffs.c
     snmpnetstat/winstub.c)
 set (NETSNMP_SNMPNETSTAT_LIBDEPS
-    libnetsnmp)
+    netsnmp)
 if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPNETSTAT_VERSION_FILES
         NAME "${NETSNMP_SNMPNETSTAT_NAME} - display networking status and configuration information from a network entity via SNMP"
@@ -289,7 +291,7 @@ set (NETSNMP_SNMPSET_NAME
 set (NETSNMP_SNMPSET_SRCS
     snmpset.c)
 set (NETSNMP_SNMPSET_LIBDEPS
-    libnetsnmp)
+    netsnmp)
 if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPSET_VERSION_FILES
         NAME "${NETSNMP_SNMPSET_NAME} - communicates with a network entity using SNMP SET requests"
@@ -316,7 +318,7 @@ set (NETSNMP_SNMPSTATUS_NAME
 set (NETSNMP_SNMPSTATUS_SRCS
     snmpstatus.c)
 set (NETSNMP_SNMPSTATUS_LIBDEPS
-    libnetsnmp)
+    netsnmp)
 if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPSTATUS_VERSION_FILES
         NAME "${NETSNMP_SNMPSTATUS_NAME} - retrieves a fixed set of management information from a network entity"
@@ -343,7 +345,7 @@ set (NETSNMP_SNMPTABLE_NAME
 set (NETSNMP_SNMPTABLE_SRCS
     snmptable.c)
 set (NETSNMP_SNMPTABLE_LIBDEPS
-    libnetsnmp)
+    netsnmp)
 if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPTABLE_VERSION_FILES
         NAME "${NETSNMP_SNMPTABLE_NAME} - retrieve an SNMP table and display it in tabular form"
@@ -370,7 +372,7 @@ set (NETSNMP_SNMPTEST_NAME
 set (NETSNMP_SNMPTEST_SRCS
     snmptest.c)
 set (NETSNMP_SNMPTEST_LIBDEPS
-    libnetsnmp)
+    netsnmp)
 if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPTEST_VERSION_FILES
         NAME "${NETSNMP_SNMPTEST_NAME} - communicates with a network entity using SNMP requests"
@@ -397,7 +399,7 @@ set (NETSNMP_SNMPTRANSLATE_NAME
 set (NETSNMP_SNMPTRANSLATE_SRCS
     snmptranslate.c)
 set (NETSNMP_SNMPTRANSLATE_LIBDEPS
-    libnetsnmp)
+    netsnmp)
 if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPTRANSLATE_VERSION_FILES
         NAME "${NETSNMP_SNMPTRANSLATE_NAME} - translate MIB OID names between numeric and textual forms"
@@ -424,7 +426,7 @@ set (NETSNMP_SNMPTRAP_NAME
 set (NETSNMP_SNMPTRAP_SRCS
     snmptrap.c)
 set (NETSNMP_SNMPTRAP_LIBDEPS
-    libnetsnmp)
+    netsnmp)
 if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPTRAP_VERSION_FILES
         NAME "${NETSNMP_SNMPTRAP_NAME} - sends an SNMP notification to a manager"
@@ -454,10 +456,10 @@ set (NETSNMP_SNMPTRAPD_SRCS
     snmptrapd_log.c
     ../snmplib/winservice.c)
 set (NETSNMP_SNMPTRAPD_LIBDEPS
-    libnetsnmp
-    libnetsnmpagent
-    libnetsnmpmibs
-    libnetsnmptrapd)
+    netsnmp
+    netsnmpagent
+    netsnmpmibs
+    netsnmptrapd)
 if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPTRAPD_VERSION_FILES
         NAME "${NETSNMP_SNMPTRAPD_NAME} - receive and log SNMP trap messages"
@@ -484,7 +486,7 @@ set (NETSNMP_SNMPUSM_NAME
 set (NETSNMP_SNMPUSM_SRCS
     snmpusm.c)
 set (NETSNMP_SNMPUSM_LIBDEPS
-    libnetsnmp)
+    netsnmp)
 if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPUSM_VERSION_FILES
         NAME "${NETSNMP_SNMPUSM_NAME} - creates and maintains SNMPv3 users on a network entity"
@@ -511,7 +513,7 @@ set (NETSNMP_SNMPVACM_NAME
 set (NETSNMP_SNMPVACM_SRCS
     snmpvacm.c)
 set (NETSNMP_SNMPVACM_LIBDEPS
-    libnetsnmp)
+    netsnmp)
 if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPVACM_VERSION_FILES
         NAME "${NETSNMP_SNMPVACM_NAME} - creates and maintains SNMPv3 View-based Access Control entries on a network entity"
@@ -538,7 +540,7 @@ set (NETSNMP_SNMPWALK_NAME
 set (NETSNMP_SNMPWALK_SRCS
     snmpwalk.c)
 set (NETSNMP_SNMPWALK_LIBDEPS
-    libnetsnmp)
+    netsnmp)
 if (WIN32)
     generate_product_exe_version (NETSNMP_SNMPWALK_VERSION_FILES
         NAME "${NETSNMP_SNMPWALK_NAME} - retrieve a subtree of management values using SNMP GETNEXT requests"

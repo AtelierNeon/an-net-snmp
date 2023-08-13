@@ -5,10 +5,10 @@ include_directories (
     ${PROJECT_SOURCE_DIR}/include
     ${PROJECT_BINARY_DIR}/include)
 
-## Component - libnetsnmpagent
-set (NETSNMP_LIBNETSNMPAGENT_NAME
-    libnetsnmpagent)
-set (NETSNMP_LIBNETSNMPAGENT_SRCS
+## Component - netsnmpagent
+set (NETSNMP_NETSNMPAGENTLIB_NAME
+    netsnmpagent)
+set (NETSNMP_NETSNMPAGENTLIB_SRCS
     agent_handler.c
     agent_index.c
     agent_read_config.c
@@ -18,20 +18,22 @@ set (NETSNMP_LIBNETSNMPAGENT_SRCS
     snmp_agent.c
     snmp_vars.c)
 if (NOT WIN32)
-    set (NETSNMP_LIBNETSNMPAGENT_SRCS
-        ${NETSNMP_LIBNETSNMPAGENT_SRCS}
+    set (NETSNMP_NETSNMPAGENTLIB_SRCS
+        ${NETSNMP_NETSNMPAGENTLIB_SRCS}
         netsnmp_close_fds.c)
 endif ()
-set (NETSNMP_LIBNETSNMPAGENT_LIBDEPS
-    libnetsnmp)
-set (NETSNMP_LIBNETSNMPAGENT_LIBTYPE
+set (NETSNMP_NETSNMPAGENTLIB_LIBDEPS
+    netsnmp)
+set (NETSNMP_NETSNMPAGENTLIB_LIBTYPE
     STATIC)
-add_library (${NETSNMP_LIBNETSNMPAGENT_NAME} ${NETSNMP_LIBNETSNMPAGENT_LIBTYPE}
-    ${NETSNMP_LIBNETSNMPAGENT_SRCS})
-set_target_properties(${NETSNMP_LIBNETSNMPAGENT_NAME}
-    PROPERTIES PREFIX "")
-target_link_libraries (${NETSNMP_LIBNETSNMPAGENT_NAME}
-    ${NETSNMP_LIBNETSNMPAGENT_LIBDEPS})
+add_library (${NETSNMP_NETSNMPAGENTLIB_NAME} ${NETSNMP_NETSNMPAGENTLIB_LIBTYPE}
+    ${NETSNMP_NETSNMPAGENTLIB_SRCS})
+target_link_libraries (${NETSNMP_NETSNMPAGENTLIB_NAME}
+    ${NETSNMP_NETSNMPAGENTLIB_LIBDEPS})
+install (TARGETS ${NETSNMP_NETSNMPAGENTLIB_NAME}
+    RUNTIME DESTINATION bin
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib)
 
 ## Process sub-components
 add_subdirectory (mibgroup)

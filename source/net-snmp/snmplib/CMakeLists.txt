@@ -13,10 +13,10 @@ if (NETSNMP_WITH_SSL)
         ${OPENSSL_INCLUDE_DIRS})
 endif ()
 
-## Component - libnetsnmp
-set (NETSNMP_LIBNETSNMP_NAME
-    libnetsnmp)
-set (NETSNMP_LIBNETSNMP_SRCS
+## Component - netsnmp
+set (NETSNMP_NETSNMPLIB_NAME
+    netsnmp)
+set (NETSNMP_NETSNMPLIB_SRCS
     asn1.c
     asprintf.c
     callback.c
@@ -85,74 +85,74 @@ set (NETSNMP_LIBNETSNMP_SRCS
     vacm.c
     winpipe.c)
 if (WIN32)
-    set (NETSNMP_LIBNETSNMP_SRCS
-        ${NETSNMP_LIBNETSNMP_SRCS}
+    set (NETSNMP_NETSNMPLIB_SRCS
+        ${NETSNMP_NETSNMPLIB_SRCS}
         closedir.c
         gettimeofday.c
         opendir.c
         readdir.c)
 else ()
-    set (NETSNMP_LIBNETSNMP_SRCS
-        ${NETSNMP_LIBNETSNMP_SRCS}
+    set (NETSNMP_NETSNMPLIB_SRCS
+        ${NETSNMP_NETSNMPLIB_SRCS}
         sd-daemon.c
         transports/snmpIPXDomain.c
         transports/snmpSTDDomain.c
         transports/snmpUnixDomain.c)
 endif ()
-set (NETSNMP_LIBNETSNMP_LIBDEPS
+set (NETSNMP_NETSNMPLIB_LIBDEPS
     "")
-set (NETSNMP_LIBNETSNMP_LIBTYPE
+set (NETSNMP_NETSNMPLIB_LIBTYPE
     STATIC)
 if (WIN32)
-    generate_product_dll_version(NETSNMP_LIBNETSNMP_VERSION_FILES
-        NAME "${NETSNMP_LIBNETSNMP_NAME} - The Net-SNMP library"
+    generate_product_dll_version(NETSNMP_NETSNMPLIB_VERSION_FILES
+        NAME "${NETSNMP_NETSNMPLIB_NAME} - The Net-SNMP library"
         BUNDLE "Net-SNMP"
         VERSION_MAJOR ${NETSNMP_VER_MAJOR}
         VERSION_MINOR ${NETSNMP_VER_MINOR}
         VERSION_PATCH ${NETSNMP_VER_PATCH}
         VERSION_REVISION ${MY_REVISION}
-        ORIGINAL_FILENAME "${NETSNMP_LIBNETSNMP_NAME}.dll")
-    set (NETSNMP_LIBNETSNMP_SRCS
-        ${NETSNMP_LIBNETSNMP_SRCS}
-        ${NETSNMP_LIBNETSNMP_VERSION_FILES})
-    set (NETSNMP_LIBNETSNMP_LIBDEPS
-        ${NETSNMP_LIBNETSNMP_LIBDEPS}
+        ORIGINAL_FILENAME "${NETSNMP_NETSNMPLIB_NAME}.dll")
+    set (NETSNMP_NETSNMPLIB_SRCS
+        ${NETSNMP_NETSNMPLIB_SRCS}
+        ${NETSNMP_NETSNMPLIB_VERSION_FILES})
+    set (NETSNMP_NETSNMPLIB_LIBDEPS
+        ${NETSNMP_NETSNMPLIB_LIBDEPS}
         ws2_32
         advapi32)
 endif ()
 if (NETSNMP_WITH_SDK)
-    set (NETSNMP_LIBNETSNMP_SRCS
-        ${NETSNMP_LIBNETSNMP_SRCS}
+    set (NETSNMP_NETSNMPLIB_SRCS
+        ${NETSNMP_NETSNMPLIB_SRCS}
         transports/snmpIPv6BaseDomain.c
         transports/snmpTCPIPv6Domain.c
         transports/snmpUDPIPv6Domain.c)
 endif ()
 if (NETSNMP_WITH_SSL)
-    set (NETSNMP_LIBNETSNMP_SRCS
-        ${NETSNMP_LIBNETSNMP_SRCS}
+    set (NETSNMP_NETSNMPLIB_SRCS
+        ${NETSNMP_NETSNMPLIB_SRCS}
         transports/snmpDTLSUDPDomain.c
         transports/snmpTLSBaseDomain.c
         transports/snmpTLSTCPDomain.c
         snmp_openssl.c)
-    set (NETSNMP_LIBNETSNMP_LIBDEPS
-        ${NETSNMP_LIBNETSNMP_LIBDEPS}
+    set (NETSNMP_NETSNMPLIB_LIBDEPS
+        ${NETSNMP_NETSNMPLIB_LIBDEPS}
         ${OPENSSL_LIBRARIES})
 endif ()
 if (NETSNMP_WITH_SHARED_LIBRARIES)
-    set (NETSNMP_LIBNETSNMP_LIBTYPE SHARED)
+    set (NETSNMP_NETSNMPLIB_LIBTYPE SHARED)
 endif ()
-add_library (${NETSNMP_LIBNETSNMP_NAME} ${NETSNMP_LIBNETSNMP_LIBTYPE}
-    ${NETSNMP_LIBNETSNMP_SRCS})
-set_target_properties(${NETSNMP_LIBNETSNMP_NAME}
-    PROPERTIES PREFIX "")
-target_link_libraries (${NETSNMP_LIBNETSNMP_NAME}
-    ${NETSNMP_LIBNETSNMP_LIBDEPS})
+add_library (${NETSNMP_NETSNMPLIB_NAME} ${NETSNMP_NETSNMPLIB_LIBTYPE}
+    ${NETSNMP_NETSNMPLIB_SRCS})
+set_target_properties(${NETSNMP_NETSNMPLIB_NAME}
+    PROPERTIES PREFIX "lib")
+target_link_libraries (${NETSNMP_NETSNMPLIB_NAME}
+    ${NETSNMP_NETSNMPLIB_LIBDEPS})
 if (NETSNMP_WITH_SHARED_LIBRARIES)
-    target_compile_definitions (${NETSNMP_LIBNETSNMP_NAME} PRIVATE
+    target_compile_definitions (${NETSNMP_NETSNMPLIB_NAME} PRIVATE
         NETSNMP_DLL
         NETSNMP_USE_DLL)
 endif ()
-install (TARGETS ${NETSNMP_LIBNETSNMP_NAME}
+install (TARGETS ${NETSNMP_NETSNMPLIB_NAME}
     RUNTIME DESTINATION bin
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib)

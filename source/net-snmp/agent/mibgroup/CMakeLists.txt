@@ -2,9 +2,9 @@
 include_directories (
     ${PROJECT_SOURCE_DIR}/agent)
 
-## Component - libnetsnmpmibs
+## Component - netsnmpmibs
 set (NETSNMP_NETSNMPMIBSLIB_NAME
-    libnetsnmpmibs)
+    netsnmpmibs)
 set (NETSNMP_NETSNMPMIBSLIB_SRCS
     mibII/setSerialNo.c
     mibII/snmp_mib.c
@@ -137,12 +137,14 @@ if (NETSNMP_WITH_SDK)
     endif ()
 endif ()
 set (NETSNMP_NETSNMPMIBSLIB_LIBDEPS
-    libnetsnmp)
+    netsnmp)
 set (NETSNMP_NETSNMPMIBSLIB_LIBTYPE
     STATIC)
 add_library (${NETSNMP_NETSNMPMIBSLIB_NAME} ${NETSNMP_NETSNMPMIBSLIB_LIBTYPE}
     ${NETSNMP_NETSNMPMIBSLIB_SRCS})
-set_target_properties(${NETSNMP_NETSNMPMIBSLIB_NAME}
-    PROPERTIES PREFIX "")
 target_link_libraries (${NETSNMP_NETSNMPMIBSLIB_NAME}
     ${NETSNMP_NETSNMPMIBSLIB_LIBDEPS})
+install (TARGETS ${NETSNMP_NETSNMPMIBSLIB_NAME}
+    RUNTIME DESTINATION bin
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib)
