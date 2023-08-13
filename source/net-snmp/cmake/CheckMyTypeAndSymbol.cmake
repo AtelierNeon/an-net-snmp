@@ -10,12 +10,12 @@ macro (check_by_try_compile MY_TEST)
         message (STATUS "Performing My Test ${MY_TEST} - Success")
     else ()
         message(STATUS "Performing My Test ${MY_TEST} - Failed")
-        set(${MY_TEST} "")
-        file(APPEND ${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/CMakeError.log
-        "Performing My Test ${MY_TEST} failed with the following output:\n"
-        "${OUTPUT}\n")
+        set (${MY_TEST} "")
+        file (APPEND ${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/CMakeError.log
+            "Performing My Test ${MY_TEST} failed with the following output:\n"
+            "${OUTPUT}\n")
     endif ()
-endmacro()
+endmacro ()
 
 
 include (CheckIncludeFile)

@@ -6,14 +6,13 @@
 #include <time.h>
 
 int
-main ()
+main()
 {
-if ((struct tm *) 0)
-return 0;
+  if ((struct tm *) 0)
+    return 0;
   ;
   return 0;
 }
-
 #endif
 
 #ifdef HAVE_IN_ADDR_T
@@ -22,12 +21,12 @@ return 0;
 #include <arpa/inet.h>
 
 int
-main ()
+main()
 {
-if ((in_addr_t *) 0)
-  return 0;
-if (sizeof (in_addr_t))
-  return 0;
+  if ((in_addr_t *) 0)
+    return 0;
+  if (sizeof (in_addr_t))
+    return 0;
   ;
   return 0;
 }
