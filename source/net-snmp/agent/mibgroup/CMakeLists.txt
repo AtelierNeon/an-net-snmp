@@ -23,8 +23,8 @@ set (NETSNMP_NETSNMPMIBSLIB_SRCS
     disman/event/mteObjectsConf.c
     disman/event/mteObjectsTable.c
     disman/event/mteScalars.c
-    disman/event/mteTriggerBooleanTable.c
     disman/event/mteTrigger.c
+    disman/event/mteTriggerBooleanTable.c
     disman/event/mteTriggerConf.c
     disman/event/mteTriggerDeltaTable.c
     disman/event/mteTriggerExistenceTable.c
@@ -84,29 +84,28 @@ set (NETSNMP_NETSNMPMIBSLIB_SRCS
     util_funcs/header_simple_table.c
     header_complex.c
     ../helpers/all_helpers.c
+    ../helpers/baby_steps.c
     ../helpers/bulk_to_next.c
     ../helpers/cache_handler.c
     ../helpers/debug_handler.c
+    ../helpers/instance.c
     ../helpers/mode_end_call.c
     ../helpers/multiplexer.c
     ../helpers/null.c
     ../helpers/old_api.c
     ../helpers/read_only.c
     ../helpers/row_merge.c
+    ../helpers/scalar.c
+    ../helpers/scalar_group.c
     ../helpers/serialize.c
+    ../helpers/snmp_get_statistic.c
     ../helpers/stash_cache.c
     ../helpers/stash_to_next.c
     ../helpers/table.c
     ../helpers/table_array.c
+    ../helpers/table_container.c
     ../helpers/table_data.c
     ../helpers/table_dataset.c
-
-    ../helpers/baby_steps.c
-    ../helpers/instance.c
-    ../helpers/scalar.c
-    ../helpers/scalar_group.c
-    ../helpers/snmp_get_statistic.c
-    ../helpers/table_container.c
     ../helpers/table_iterator.c
     ../helpers/table_tdata.c
     ../helpers/watcher.c
