@@ -91,6 +91,11 @@ fi
 ## Print build information
 echo "[Linux] Project information: revision:" $PROJECT_REVISION
 echo "[Linux] Project information: release type:" $PROJECT_RELEASE_TYPE
+echo "[Linux] Project information: Net-SNMP with disabled MIB loading: $PROJECT_NETSNMP_WITH_DISABLED_MIB_LOADING"
+echo "[Linux] Project information: Net-SNMP with IPv6: $PROJECT_NETSNMP_WITH_IPV6"
+echo "[Linux] Project information: Net-SNMP with shared libraries: $PROJECT_NETSNMP_WITH_SHARED_LIBRARIES"
+echo "[Linux] Project information: Net-SNMP with sibling SSL: $PROJECT_NETSNMP_WITH_SIBLING_SSL"
+echo "[Linux] Project information: Net-SNMP with SSL: $PROJECT_NETSNMP_WITH_SSL"
 echo "[Linux] Project information: OpenSSL with shared libraries: $PROJECT_OPENSSL_WITH_SHARED_LIBRARIES"
 echo "[Linux] Project information: OpenSSL with shared Zlib: $PROJECT_OPENSSL_WITH_SHARED_ZLIB"
 echo "[Linux] Project information: OpenSSL with Zlib: $PROJECT_OPENSSL_WITH_ZLIB"
