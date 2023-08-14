@@ -134,6 +134,10 @@ if (WIN32)
         ORIGINAL_FILENAME "${NETSNMP_SNMPD_NAME}.exe")
     set (NETSNMP_SNMPD_SRCS
         ${NETSNMP_SNMPD_SRCS} ${NETSNMP_SNMPD_VERSION_FILES})
+else ()
+    set (NETSNMP_SNMPD_LIBDEPS
+        ${NETSNMP_SNMPD_LIBDEPS}
+        dl)
 endif ()
 add_executable (${NETSNMP_SNMPD_NAME}
     ${NETSNMP_SNMPD_SRCS})
