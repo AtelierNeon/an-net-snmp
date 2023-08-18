@@ -42,6 +42,7 @@ $ProjectNetSnmpWithSharedLibraries = if ($Env:MY_PROJECT_NETSNMP_WITH_SHARED_LIB
 $ProjectNetSnmpWithSiblingSsl = if ($Env:MY_PROJECT_NETSNMP_WITH_SIBLING_SSL) {$Env:MY_PROJECT_NETSNMP_WITH_SIBLING_SSL} else {'OFF'}
 $ProjectNetSnmpWithSsl = if ($Env:MY_PROJECT_NETSNMP_WITH_SSL) {$Env:MY_PROJECT_NETSNMP_WITH_SSL} else {'OFF'}
 $ProjectNetSnmpWithWinExtDll = if ($Env:MY_PROJECT_NETSNMP_WITH_WINEXTDLL) {$Env:MY_PROJECT_NETSNMP_WITH_WINEXTDLL} else {'OFF'}
+$ProjectOpenSslWithDisabledApps = if ($Env:MY_PROJECT_OPENSSL_WITH_DISABLED_APPS) {$Env:MY_PROJECT_OPENSSL_WITH_DISABLED_APPS} else {'OFF'}
 $ProjectOpenSslWithSharedLibraries = if ($Env:MY_PROJECT_OPENSSL_WITH_SHARED_LIBRARIES) {$Env:MY_PROJECT_OPENSSL_WITH_SHARED_LIBRARIES} else {'OFF'}
 $ProjectOpenSslWithSharedZlib = if ($Env:MY_PROJECT_OPENSSL_WITH_SHARED_ZLIB) {$Env:MY_PROJECT_OPENSSL_WITH_SHARED_ZLIB} else {'OFF'}
 $ProjectOpenSslWithZlib = if ($Env:MY_PROJECT_OPENSSL_WITH_ZLIB) {$Env:MY_PROJECT_OPENSSL_WITH_ZLIB} else {'OFF'}
@@ -72,6 +73,9 @@ if ('ON'.Equals($ProjectNetSnmpWithSsl)) {
 }
 if ('ON'.Equals($ProjectNetSnmpWithWinExtDll)) {
     $MyCmakeCommonArgumentList += "-DNETSNMP_WITH_WINEXTDLL=$ProjectNetSnmpWithWinExtDll"
+}
+if ('ON'.Equals($ProjectOpenSslWithDisabledApps)) {
+    $MyCmakeCommonArgumentList += "-DOPENSSL_WITH_DISABLED_APPS=$ProjectOpenSslWithDisabledApps"
 }
 if ('ON'.Equals($ProjectOpenSslWithSharedLibraries)) {
     $MyCmakeCommonArgumentList += "-DOPENSSL_WITH_SHARED_LIBRARIES=$ProjectOpenSslWithSharedLibraries"
@@ -158,6 +162,7 @@ Write-Information "[PowerShell] Project information: Net-SNMP with shared librar
 Write-Information "[PowerShell] Project information: Net-SNMP with sibling SSL: $ProjectNetSnmpWithSiblingSsl"
 Write-Information "[PowerShell] Project information: Net-SNMP with SSL: $ProjectNetSnmpWithSsl"
 Write-Information "[PowerShell] Project information: Net-SNMP with WinExtDll: $ProjectNetSnmpWithWinExtDll"
+Write-Information "[PowerShell] Project information: OpenSSL with disabled apps: $ProjectOpenSslWithDisabledApps"
 Write-Information "[PowerShell] Project information: OpenSSL with shared libraries: $ProjectOpenSslWithSharedLibraries"
 Write-Information "[PowerShell] Project information: OpenSSL with shared Zlib: $ProjectOpenSslWithSharedZlib"
 Write-Information "[PowerShell] Project information: OpenSSL with Zlib: $ProjectOpenSslWithZlib"
