@@ -6,6 +6,7 @@ project (netsnmp
     DESCRIPTION "Net-SNMP")
 
 ## Project options
+option (NETSNMP_WITH_DISABLED_APPS "Build Net-SNMP with disabled apps." OFF)
 option (NETSNMP_WITH_DISABLED_MIB_LOADING "Build Net-SNMP with disabled MIB loading." OFF)
 option (NETSNMP_WITH_IPV6 "Build Net-SNMP with IPv6 transports." OFF)
 option (NETSNMP_WITH_SDK "Build Net-SNMP with Microsoft Platform SDK." ON)
@@ -255,5 +256,7 @@ install (FILES ${PUBLIC_SHARE_SNMP_SNMPCONF_DATA_SNMPTRAPD_DATA} DESTINATION sha
 
 ## Process sub-components
 add_subdirectory (agent)
-add_subdirectory (apps)
+if (NOT NETSNMP_WITH_DISABLED_APPS)
+    add_subdirectory (apps)
+endif()
 add_subdirectory (snmplib)

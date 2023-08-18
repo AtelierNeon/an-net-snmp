@@ -36,6 +36,7 @@ $ProjectWithStaticVcrt = if ($Env:MY_PROJECT_WITH_STATIC_VCRT) {$Env:MY_PROJECT_
 $ProjectWithWorkaroundArm64rt = if ($Env:MY_PROJECT_WITH_WORKAROUND_ARM64RT) {$Env:MY_PROJECT_WITH_WORKAROUND_ARM64RT} else {'OFF'}
 $ProjectWithWorkaroundOptGy = if ($Env:MY_PROJECT_WITH_WORKAROUND_OPT_GY) {$Env:MY_PROJECT_WITH_WORKAROUND_OPT_GY} else {'OFF'}
 $ProjectWithWorkaroundSpectre = if ($Env:MY_PROJECT_WITH_WORKAROUND_SPECTRE) {$Env:MY_PROJECT_WITH_WORKAROUND_SPECTRE} else {'OFF'}
+$ProjectNetSnmpWithDisabledApps = if ($Env:MY_PROJECT_NETSNMP_WITH_DISABLED_APPS) {$Env:MY_PROJECT_NETSNMP_WITH_DISABLED_APPS} else {'OFF'}
 $ProjectNetSnmpWithDisabledMibLoading = if ($Env:MY_PROJECT_NETSNMP_WITH_DISABLED_MIB_LOADING) {$Env:MY_PROJECT_NETSNMP_WITH_DISABLED_MIB_LOADING} else {'OFF'}
 $ProjectNetSnmpWithIpv6 = if ($Env:MY_PROJECT_NETSNMP_WITH_IPV6) {$Env:MY_PROJECT_NETSNMP_WITH_IPV6} else {'OFF'}
 $ProjectNetSnmpWithSharedLibraries = if ($Env:MY_PROJECT_NETSNMP_WITH_SHARED_LIBRARIES) {$Env:MY_PROJECT_NETSNMP_WITH_SHARED_LIBRARIES} else {'OFF'}
@@ -56,6 +57,9 @@ $MyCmakeCommonArgumentList = @(
         "-T $ProjectToolset",
         "-DMY_REVISION=$ProjectRevision"
 )
+if ('ON'.Equals($ProjectNetSnmpWithDisabledApps)) {
+    $MyCmakeCommonArgumentList += "-DNETSNMP_WITH_DISABLED_APPS=$ProjectNetSnmpWithDisabledApps"
+}
 if ('ON'.Equals($ProjectNetSnmpWithDisabledMibLoading)) {
     $MyCmakeCommonArgumentList += "-DNETSNMP_WITH_DISABLED_MIB_LOADING=$ProjectNetSnmpWithDisabledMibLoading"
 }
@@ -156,6 +160,7 @@ Write-Information "[PowerShell] Project information: release type: `"$ProjectRel
 Write-Information "[PowerShell] Project information: CMake generator: `"$MyCmakeGenerator`""
 Write-Information "[PowerShell] Project information: CMake toolset: `"$ProjectToolset`""
 Write-Information "[PowerShell] Project information: CMake platform to build: $MyCmakePlatformToBuildListString"
+Write-Information "[PowerShell] Project information: Net-SNMP with disabled apps: $ProjectNetSnmpWithDisabledApps"
 Write-Information "[PowerShell] Project information: Net-SNMP with disabled MIB loading: $ProjectNetSnmpWithDisabledMibLoading"
 Write-Information "[PowerShell] Project information: Net-SNMP with IPv6: $ProjectNetSnmpWithIpv6"
 Write-Information "[PowerShell] Project information: Net-SNMP with shared libraries: $ProjectNetSnmpWithSharedLibraries"
