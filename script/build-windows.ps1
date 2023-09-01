@@ -15,9 +15,10 @@ $CmakeToolsetToGeneratorMap = @{
         'v142' = 'Visual Studio 16 2019'
         'v143' = 'Visual Studio 17 2022'
 }
-$SourceFolder = 'source'
-$TempRootFolder = 'temp'
-$TempBuildFolder = Join-Path -Path $TempRootFolder -ChildPath 'b'
+$ProjectFolder = Join-Path -Path $PSScriptRoot -ChildPath '..'
+$SourceFolder = $ProjectFolder
+$TempRootFolder = Join-Path -Path $ProjectFolder -ChildPath 'build'
+$TempBuildFolder = Join-Path -Path $TempRootFolder -ChildPath 't'
 $TempInstallFolder = Join-Path -Path $TempRootFolder -ChildPath 'i'
 
 ##
@@ -41,7 +42,6 @@ $ProjectNetSnmpWithDisabledApps = if ($Env:MY_PROJECT_NETSNMP_WITH_DISABLED_APPS
 $ProjectNetSnmpWithDisabledMibLoading = if ($Env:MY_PROJECT_NETSNMP_WITH_DISABLED_MIB_LOADING) {$Env:MY_PROJECT_NETSNMP_WITH_DISABLED_MIB_LOADING} else {'OFF'}
 $ProjectNetSnmpWithIpv6 = if ($Env:MY_PROJECT_NETSNMP_WITH_IPV6) {$Env:MY_PROJECT_NETSNMP_WITH_IPV6} else {'OFF'}
 $ProjectNetSnmpWithSharedLibraries = if ($Env:MY_PROJECT_NETSNMP_WITH_SHARED_LIBRARIES) {$Env:MY_PROJECT_NETSNMP_WITH_SHARED_LIBRARIES} else {'OFF'}
-$ProjectNetSnmpWithSiblingSsl = if ($Env:MY_PROJECT_NETSNMP_WITH_SIBLING_SSL) {$Env:MY_PROJECT_NETSNMP_WITH_SIBLING_SSL} else {'OFF'}
 $ProjectNetSnmpWithSsl = if ($Env:MY_PROJECT_NETSNMP_WITH_SSL) {$Env:MY_PROJECT_NETSNMP_WITH_SSL} else {'OFF'}
 $ProjectNetSnmpWithWinExtDll = if ($Env:MY_PROJECT_NETSNMP_WITH_WINEXTDLL) {$Env:MY_PROJECT_NETSNMP_WITH_WINEXTDLL} else {'OFF'}
 $ProjectOpenSslWithDisabledApps = if ($Env:MY_PROJECT_OPENSSL_WITH_DISABLED_APPS) {$Env:MY_PROJECT_OPENSSL_WITH_DISABLED_APPS} else {'OFF'}
@@ -69,9 +69,6 @@ if ('ON'.Equals($ProjectNetSnmpWithIpv6)) {
 }
 if ('ON'.Equals($ProjectNetSnmpWithSharedLibraries)) {
     $MyCmakeCommonArgumentList += "-DNETSNMP_WITH_SHARED_LIBRARIES=$ProjectNetSnmpWithSharedLibraries"
-}
-if ('ON'.Equals($ProjectNetSnmpWithSiblingSsl)) {
-    $MyCmakeCommonArgumentList += "-DNETSNMP_WITH_SIBLING_SSL=$ProjectNetSnmpWithSiblingSsl"
 }
 if ('ON'.Equals($ProjectNetSnmpWithSsl)) {
     $MyCmakeCommonArgumentList += "-DNETSNMP_WITH_SSL=$ProjectNetSnmpWithSsl"
@@ -166,7 +163,6 @@ Write-Information "[PowerShell] Project information: Net-SNMP with disabled apps
 Write-Information "[PowerShell] Project information: Net-SNMP with disabled MIB loading: $ProjectNetSnmpWithDisabledMibLoading"
 Write-Information "[PowerShell] Project information: Net-SNMP with IPv6: $ProjectNetSnmpWithIpv6"
 Write-Information "[PowerShell] Project information: Net-SNMP with shared libraries: $ProjectNetSnmpWithSharedLibraries"
-Write-Information "[PowerShell] Project information: Net-SNMP with sibling SSL: $ProjectNetSnmpWithSiblingSsl"
 Write-Information "[PowerShell] Project information: Net-SNMP with SSL: $ProjectNetSnmpWithSsl"
 Write-Information "[PowerShell] Project information: Net-SNMP with WinExtDll: $ProjectNetSnmpWithWinExtDll"
 Write-Information "[PowerShell] Project information: OpenSSL with disabled apps: $ProjectOpenSslWithDisabledApps"

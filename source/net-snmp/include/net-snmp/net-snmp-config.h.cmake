@@ -779,7 +779,11 @@
 #cmakedefine HAVE_PCAP_PCAP_H 1
 
 /* Define if you have <process.h> header file. (Win32-getpid) */
-#cmakedefine HAVE_PROCESS_H 1
+#ifdef WIN32
+# define HAVE_PROCESS_H 1
+#else
+# cmakedefine HAVE_PROCESS_H 1
+#endif
 
 /* define if you have pci_lookup_name() */
 #undef HAVE_PCI_LOOKUP_NAME

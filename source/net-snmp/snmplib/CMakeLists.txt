@@ -8,7 +8,7 @@ include_directories (
     ${PROJECT_SOURCE_DIR}/include
     ${PROJECT_BINARY_DIR}/include
     ${PROJECT_SOURCE_DIR}/snmplib)
-if (NETSNMP_WITH_SSL)
+if (NETSNMP_WITH_SSL AND OPENSSL_FOUND)
     include_directories (
         ${OPENSSL_INCLUDE_DIRS})
 endif ()
@@ -127,7 +127,7 @@ if (NETSNMP_WITH_SDK)
         transports/snmpTCPIPv6Domain.c
         transports/snmpUDPIPv6Domain.c)
 endif ()
-if (NETSNMP_WITH_SSL)
+if (NETSNMP_WITH_SSL AND OPENSSL_FOUND)
     set (NETSNMP_NETSNMPLIB_SRCS
         ${NETSNMP_NETSNMPLIB_SRCS}
         transports/snmpDTLSUDPDomain.c

@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.1)
+cmake_minimum_required (VERSION 3.1...3.15.0)
 
 ## Dummy basic information for meta project
 project (main)
@@ -14,7 +14,7 @@ option (BUILD_WITH_WORKAROUND_SOFTINTRIN "Build library with workaround softintr
 option (BUILD_WITH_WORKAROUND_SPECTRE "Build library with workaround spectre mitigation library" OFF)
 
 ## Append custom CMake module path
-list (APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake-modules/")
+list (APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/source/cmake-modules/")
 
 ## Import custom CMake modules
 if (WIN32)
@@ -22,6 +22,6 @@ if (WIN32)
 endif (WIN32)
 
 ## Process sub-components
-add_subdirectory (net-snmp)
-add_subdirectory (openssl)
-add_subdirectory (zlib)
+add_subdirectory (source/net-snmp)
+add_subdirectory (source/openssl)
+add_subdirectory (source/zlib)

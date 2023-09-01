@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.1)
+cmake_minimum_required (VERSION 3.1...3.15.0)
 
 ## Project basic information
 project (netsnmp
@@ -11,7 +11,6 @@ option (NETSNMP_WITH_DISABLED_MIB_LOADING "Build Net-SNMP with disabled MIB load
 option (NETSNMP_WITH_IPV6 "Build Net-SNMP with IPv6 transports." OFF)
 option (NETSNMP_WITH_SDK "Build Net-SNMP with Microsoft Platform SDK." ON)
 option (NETSNMP_WITH_SSL "Build Net-SNMP with OpenSSL." OFF)
-option (NETSNMP_WITH_SIBLING_SSL "Build Net-SNMP with sibling OpenSSL." OFF)
 option (NETSNMP_WITH_SHARED_LIBRARIES "Build shared version of the libnetsnmp library." OFF)
 option (NETSNMP_WITH_WINEXTDLL "Build Net-SNMP with winExtDll." OFF)
 
@@ -24,6 +23,8 @@ list (GET _my_ver_LIST 2 NETSNMP_VER_PATCH)
 if (_my_list_len EQUAL 4)
     list (GET _my_ver_LIST 3 NETSNMP_VER_PATCHLEVEL)
 endif ()
+
+message( STATUS "Net-SNMP version ${PROJECT_VERSION}" )
 
 list (APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
@@ -53,23 +54,13 @@ if (NETSNMP_WITH_IPV6)
         -DNETSNMP_ENABLE_IPV6)
     set (NETSNMP_WITH_SDK ON)
 endif ()
-if (NETSNMP_WITH_SSL OR NETSNMP_WITH_SIBLING_SSL)
-    if (NETSNMP_WITH_SIBLING_SSL)
-        message (STATUS "Use sibling OpenSSL for ${PROJECT_NAME}.")
-        set (OPENSSL_FOUND ON)
-        set (OPENSSL_INCLUDE_DIRS
-            "${PROJECT_SOURCE_DIR}/../openssl/include/"
-            "${PROJECT_BINARY_DIR}/../openssl/include/")
-        set (OPENSSL_CRYPTO_LIBRARY crypto)
-        set (OPENSSL_SSL_LIBRARY ssl)
-        set (OPENSSL_LIBRARIES
-            ${OPENSSL_CRYPTO_LIBRARY}
-            ${OPENSSL_SSL_LIBRARY})
+if (NETSNMP_WITH_SSL)
+    find_package(SiblingOpenSSL)
+    if (OPENSSL_FOUND)
         add_definitions (
             -DNETSNMP_USE_SIBLING_OPENSSL)
     else ()
         find_package (OpenSSL REQUIRED)
-        message (STATUS ${OPENSSL_FOUND})
     endif ()
     add_definitions (
         -DNETSNMP_USE_OPENSSL)
@@ -140,7 +131,7 @@ else ()
     set (SNMPDLMODPATH "\"/usr/local/lib/snmp/dlmod\"")
 endif ()
 
-if (NETSNMP_WITH_SSL)
+if (NETSNMP_WITH_SSL AND OPENSSL_FOUND)
     set (HAVE_AES_CFB128_ENCRYPT 1)
     set (HAVE_ASN1_STRING_GET0_DATA 1)
     set (HAVE_DH_GET0_KEY 1)
