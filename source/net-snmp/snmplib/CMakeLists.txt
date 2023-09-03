@@ -95,9 +95,13 @@ else ()
     set (NETSNMP_NETSNMPLIB_SRCS
         ${NETSNMP_NETSNMPLIB_SRCS}
         sd-daemon.c
-        transports/snmpIPXDomain.c
         transports/snmpSTDDomain.c
         transports/snmpUnixDomain.c)
+    if (Linux)
+        set (NETSNMP_NETSNMPLIB_SRCS
+            ${NETSNMP_NETSNMPLIB_SRCS}
+            transports/snmpIPXDomain.c)
+    endif ()
 endif ()
 set (NETSNMP_NETSNMPLIB_LIBDEPS
     "")

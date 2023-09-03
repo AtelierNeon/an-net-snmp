@@ -120,20 +120,25 @@ if (NETSNMP_WITH_SDK)
         mibII/at.c
         mibII/icmp.c
         mibII/interfaces.c
-        mibII/ip.c
-        mibII/ipAddr.c
         notification-log-mib/notification_log.c
-        mibII/route_write.c
-        mibII/tcp.c
-        mibII/tcpTable.c
-        mibII/udp.c
-        mibII/udpTable.c
-        mibII/var_route.c
         winExtDLL.c)
     if (WIN32)
         set (NETSNMP_NETSNMPMIBSLIB_SRCS
             ${NETSNMP_NETSNMPMIBSLIB_SRCS}
             mibII/data_access/at_iphlpapi.c)
+    endif ()
+    if (Linux)
+        set (NETSNMP_NETSNMPMIBSLIB_SRCS
+            ${NETSNMP_NETSNMPMIBSLIB_SRCS}
+            mibII/ip.c
+            mibII/ipAddr.c
+            mibII/ipv6.c
+            mibII/route_write.c
+            mibII/tcp.c
+            mibII/tcpTable.c
+            mibII/udp.c
+            mibII/udpTable.c
+            mibII/var_route.c)
     endif ()
 endif ()
 set (NETSNMP_NETSNMPMIBSLIB_LIBDEPS

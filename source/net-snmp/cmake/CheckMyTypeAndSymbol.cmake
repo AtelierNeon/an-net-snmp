@@ -1,8 +1,9 @@
 macro (check_by_try_compile MY_TEST)
     message (STATUS "Performing My Test ${MY_TEST}")
     try_compile(${MY_TEST}
-        ${CMAKE_BINARY_DIR}
+        ${CMAKE_BINARY_DIR}/tmp_${MY_TEST}
         ${PROJECT_SOURCE_DIR}/cmake/CheckMyTypeAndSymbol.c
+        COMPILE_DEFINITIONS -D${MY_TEST}
         OUTPUT_VARIABLE OUTPUT
     )
     if (${MY_TEST})
@@ -325,9 +326,6 @@ endif ()
 if (HAVE_SYS_TYPES_H OR HAVE_GRP_H)
     check_symbol_exists (initgroups "sys/types.h;grp.h" HAVE_INITGROUPS)
 endif ()
-if (HAVE_SYS_SOCKET_H OR HAVE_NETINET_IN_H OR HAVE_NETINET_IP_H)
-    check_symbol_exists (IP_PKTINFO "sys/socket.h;netinet/in.h;netinet/ip.h" HAVE_IP_PKTINFO)
-endif ()
 if (HAVE_SYS_TYPES_H OR HAVE_SYS_SOCKET_H OR HAVE_NETINET_IN_H)
     check_symbol_exists (IP_RECVDSTADDR "sys/types.h;sys/socket.h;netinet/in.h" HAVE_IP_RECVDSTADDR)
 endif ()
@@ -506,4 +504,5 @@ if (HAVE_SYS_VFS_H OR HAVE_SYS_STATFS_H)
 endif ()
 
 check_by_try_compile(HAVE_IN_ADDR_T)
+check_by_try_compile(HAVE_IP_PKTINFO)
 check_by_try_compile(TIME_WITH_SYS_TIME)
