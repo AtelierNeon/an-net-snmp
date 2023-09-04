@@ -97,7 +97,7 @@ else ()
         sd-daemon.c
         transports/snmpSTDDomain.c
         transports/snmpUnixDomain.c)
-    if (Linux)
+    if (NOT APPLE)
         set (NETSNMP_NETSNMPLIB_SRCS
             ${NETSNMP_NETSNMPLIB_SRCS}
             transports/snmpIPXDomain.c)

@@ -127,7 +127,7 @@ if (NETSNMP_WITH_SDK)
             ${NETSNMP_NETSNMPMIBSLIB_SRCS}
             mibII/data_access/at_iphlpapi.c)
     endif ()
-    if (Linux)
+    if (NOT APPLE)
         set (NETSNMP_NETSNMPMIBSLIB_SRCS
             ${NETSNMP_NETSNMPMIBSLIB_SRCS}
             mibII/ip.c
