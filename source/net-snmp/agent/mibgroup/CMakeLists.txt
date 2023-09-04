@@ -132,13 +132,17 @@ if (NETSNMP_WITH_SDK)
             ${NETSNMP_NETSNMPMIBSLIB_SRCS}
             mibII/ip.c
             mibII/ipAddr.c
-            mibII/ipv6.c
             mibII/route_write.c
             mibII/tcp.c
             mibII/tcpTable.c
             mibII/udp.c
             mibII/udpTable.c
             mibII/var_route.c)
+        if (UNIX)
+            set (NETSNMP_NETSNMPMIBSLIB_SRCS
+                ${NETSNMP_NETSNMPMIBSLIB_SRCS}
+                mibII/ipv6.c)
+        endif ()
     endif ()
 endif ()
 set (NETSNMP_NETSNMPMIBSLIB_LIBDEPS

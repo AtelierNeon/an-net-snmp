@@ -91,7 +91,8 @@ if (WIN32)
         gettimeofday.c
         opendir.c
         readdir.c)
-else ()
+endif ()
+if (UNIX)
     set (NETSNMP_NETSNMPLIB_SRCS
         ${NETSNMP_NETSNMPLIB_SRCS}
         sd-daemon.c

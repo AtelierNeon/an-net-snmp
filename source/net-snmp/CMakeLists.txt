@@ -44,10 +44,10 @@ endif ()
 if (UNIX)
     set (CMAKE_C_FLAGS "-Wno-unused-parameter -Wno-unused-variable -Wno-implicit-function-declaration ${CMAKE_C_FLAGS}")
     set (CMAKE_CXX_FLAGS "-Wno-unused-parameter -Wno-unused-variable -Wno-implicit-function-declaration ${CMAKE_CXX_FLAGS}")
-endif ()
-if (NOT APPLE)
-    set (CMAKE_C_FLAGS "-Wno-format-truncation ${CMAKE_C_FLAGS}")
-    set (CMAKE_CXX_FLAGS "-Wno-format-truncation ${CMAKE_CXX_FLAGS}")
+    if (NOT APPLE)
+        set (CMAKE_C_FLAGS "-Wno-format-truncation ${CMAKE_C_FLAGS}")
+        set (CMAKE_CXX_FLAGS "-Wno-format-truncation ${CMAKE_CXX_FLAGS}")
+    endif ()
 endif ()
 if (NETSNMP_WITH_DISABLED_MIB_LOADING)
     add_definitions(
@@ -78,18 +78,18 @@ if (NETSNMP_WITH_WINEXTDLL)
         -DUSING_WINEXTDLL_MODULE)
 endif ()
 
-if (NOT WIN32)
+if (UNIX)
     set (CMAKE_POSITION_INDEPENDENT_CODE ON)
-    if (NOT APPLE)
-        add_definitions (
-            -D_GNU_SOURCE
-            -Dlinux)
-    else ()
+    if (APPLE)
         add_definitions (
             -D_FORTIFY_SOURCE=0
             -Ddarwin
             -DNETSNMP_CAN_USE_SYSCTL
             -DNETSNMP_NO_SYSTEMD)
+    else ()
+        add_definitions (
+            -D_GNU_SOURCE
+            -Dlinux)
     endif ()
 endif ()
 
@@ -127,7 +127,8 @@ if (WIN32)
     if (NETSNMP_WITH_SDK)
         set (HAVE_WIN32_PLATFORM_SDK 1)
     endif ()
-else ()
+endif ()
+if (UNIX)
     set (NETSNMP_DEFAULT_MIBDIRS "\"/usr/local/share/snmp/mibs\"")
     set (NETSNMP_PERSISTENT_DIRECTORY "\"var/snmp\"")
     set (NETSNMP_TEMP_FILE_PATTERN "\"/tmp/snmpdXXXXXX\"")
