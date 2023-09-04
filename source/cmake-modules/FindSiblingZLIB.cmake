@@ -1,10 +1,9 @@
 if (EXISTS "${PROJECT_SOURCE_DIR}/../zlib/")
   message (STATUS "Sibling Zlib found.")
   set (ZLIB_FOUND True)
-  set (ZLIB_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/../zlib/")
-  if (EXISTS "${PROJECT_BINARY_DIR}/../zlib/")
-    list (APPEND ZLIB_INCLUDE_DIRS "${PROJECT_BINARY_DIR}/../zlib/")
-  endif ()
+  set (ZLIB_INCLUDE_DIRS
+    "${PROJECT_SOURCE_DIR}/../zlib/"
+    "${PROJECT_BINARY_DIR}/../zlib/")
   set (ZLIB_LIBRARY zlib)
   if (ZLIB_USE_STATIC_LIBS)
     message (STATUS "Using static sibling Zlib.")
