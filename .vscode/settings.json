@@ -1,0 +1,14 @@
+{
+    "cmake.buildDirectory": "${workspaceFolder}/build/vscode",
+    "cmake.sourceDirectory": "${workspaceFolder}",
+    "cmake.configureSettings": {
+        "MY_PROJECT_NETSNMP_WITH_DISABLED_APPS": "OFF",
+        "MY_PROJECT_NETSNMP_WITH_DISABLED_MIB_LOADING": "OFF",
+        "MY_PROJECT_NETSNMP_WITH_IPV6": "ON",
+        "MY_PROJECT_NETSNMP_WITH_SSL": "ON",
+        "MY_PROJECT_NETSNMP_WITH_WINEXTDLL": "OFF",
+        "OPENSSL_WITH_DISABLED_APPS": "ON",
+        "OPENSSL_WITH_ZLIB": "ON",
+        "ZLIB_WITH_DISABLED_TEST_APPS": "ON"
+    }
+}
