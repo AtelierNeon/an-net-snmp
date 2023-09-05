@@ -230,6 +230,10 @@ check_type_size ("uintmax_t" HAVE_UINTMAX_T)
 check_type_size ("uintptr_t" HAVE_UINTPTR_T)
 check_type_size ("unsigned long long int" HAVE_UNSIGNED_LONG_LONG_INT)
 
+if (UNIX AND NOT APPLE)
+    list (APPEND CMAKE_REQUIRED_DEFINITIONS -D_GNU_SOURCE)
+endif ()
+
 include(CheckSymbolExists)
 if (HAVE_STDIO_H)
     check_symbol_exists (asprintf "stdio.h" HAVE_ASPRINTF)
