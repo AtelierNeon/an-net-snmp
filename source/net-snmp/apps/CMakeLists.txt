@@ -565,18 +565,20 @@ target_link_libraries (${NETSNMP_SNMPWALK_NAME}
 install (TARGETS ${NETSNMP_SNMPWALK_NAME}
     RUNTIME DESTINATION bin)
 
-if (NETSNMP_WITH_LIBSSH2 AND LIBSSH2_FOUND AND UNIX)
-    ## Component - sshtosnmp
-    set (NETSNMP_SSHTOSNMP_NAME
-        sshtosnmp)
-    set (NETSNMP_SSHTOSNMP_SRCS
-        sshtosnmp.c)
-    set (NETSNMP_SSHTOSNMP_LIBDEPS
-        netsnmp)
-    add_executable (${NETSNMP_SSHTOSNMP_NAME}
-        ${NETSNMP_SSHTOSNMP_SRCS})
-    target_link_libraries (${NETSNMP_SSHTOSNMP_NAME}
-        ${NETSNMP_SSHTOSNMP_LIBDEPS})
-    install (TARGETS ${NETSNMP_SSHTOSNMP_NAME}
-        RUNTIME DESTINATION bin)
+if (NETSNMP_WITH_LIBSSH2 AND LIBSSH2_FOUND)
+    if (UNIX AND NOT APPLE)
+        ## Component - sshtosnmp
+        set (NETSNMP_SSHTOSNMP_NAME
+            sshtosnmp)
+        set (NETSNMP_SSHTOSNMP_SRCS
+            sshtosnmp.c)
+        set (NETSNMP_SSHTOSNMP_LIBDEPS
+            netsnmp)
+        add_executable (${NETSNMP_SSHTOSNMP_NAME}
+            ${NETSNMP_SSHTOSNMP_SRCS})
+        target_link_libraries (${NETSNMP_SSHTOSNMP_NAME}
+            ${NETSNMP_SSHTOSNMP_LIBDEPS})
+        install (TARGETS ${NETSNMP_SSHTOSNMP_NAME}
+            RUNTIME DESTINATION bin)
+    endif ()
 endif ()
