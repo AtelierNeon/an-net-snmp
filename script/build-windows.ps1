@@ -46,9 +46,14 @@ $ProjectWithWorkaroundSpectre = if ($Env:MY_PROJECT_WITH_WORKAROUND_SPECTRE) {$E
 ####
 #### Project component level config
 ####
+$ProjectLibSsh2WithDisabledTestApps = if ($Env:MY_PROJECT_LIBSSH2_WITH_DISABLED_TEST_APPS) {$Env:MY_PROJECT_LIBSSH2_WITH_DISABLED_TEST_APPS} else {'OFF'}
+$ProjectLibSsh2WithSharedLibraries = if ($Env:MY_PROJECT_LIBSSH2_WITH_SHARED_LIBRARIES) {$Env:MY_PROJECT_LIBSSH2_WITH_SHARED_LIBRARIES} else {'OFF'}
+$ProjectLibSsh2WithSharedZlib = if ($Env:MY_PROJECT_LIBSSH2_WITH_SHARED_ZLIB) {$Env:MY_PROJECT_LIBSSH2_WITH_SHARED_ZLIB} else {'OFF'}
+$ProjectLibSsh2WithZlib = if ($Env:MY_PROJECT_LIBSSH2_WITH_ZLIB) {$Env:MY_PROJECT_LIBSSH2_WITH_ZLIB} else {'OFF'}
 $ProjectNetSnmpWithDisabledApps = if ($Env:MY_PROJECT_NETSNMP_WITH_DISABLED_APPS) {$Env:MY_PROJECT_NETSNMP_WITH_DISABLED_APPS} else {'OFF'}
 $ProjectNetSnmpWithDisabledMibLoading = if ($Env:MY_PROJECT_NETSNMP_WITH_DISABLED_MIB_LOADING) {$Env:MY_PROJECT_NETSNMP_WITH_DISABLED_MIB_LOADING} else {'OFF'}
 $ProjectNetSnmpWithIpv6 = if ($Env:MY_PROJECT_NETSNMP_WITH_IPV6) {$Env:MY_PROJECT_NETSNMP_WITH_IPV6} else {'OFF'}
+$ProjectNetSnmpWithLibSsh2 = if ($Env:MY_PROJECT_NETSNMP_WITH_LIBSSH2) {$Env:MY_PROJECT_NETSNMP_WITH_LIBSSH2} else {'OFF'}
 $ProjectNetSnmpWithSharedLibraries = if ($Env:MY_PROJECT_NETSNMP_WITH_SHARED_LIBRARIES) {$Env:MY_PROJECT_NETSNMP_WITH_SHARED_LIBRARIES} else {'OFF'}
 $ProjectNetSnmpWithSsl = if ($Env:MY_PROJECT_NETSNMP_WITH_SSL) {$Env:MY_PROJECT_NETSNMP_WITH_SSL} else {'OFF'}
 $ProjectNetSnmpWithWinExtDll = if ($Env:MY_PROJECT_NETSNMP_WITH_WINEXTDLL) {$Env:MY_PROJECT_NETSNMP_WITH_WINEXTDLL} else {'OFF'}
@@ -67,6 +72,18 @@ $MyCmakeCommonArgumentList = @(
         "-T $ProjectToolset",
         "-DMY_REVISION=$ProjectRevision"
 )
+if ('ON'.Equals($ProjectLibSsh2WithDisabledTestApps)) {
+    $MyCmakeCommonArgumentList += "-DLIBSSH2_WITH_DISABLED_TEST_APPS=$ProjectLibSsh2WithDisabledTestApps"
+}
+if ('ON'.Equals($ProjectLibSsh2WithSharedLibraries)) {
+    $MyCmakeCommonArgumentList += "-DLIBSSH2_WITH_SHARED_LIBRARIES=$ProjectLibSsh2WithSharedLibraries"
+}
+if ('ON'.Equals($ProjectLibSsh2WithSharedZlib)) {
+    $MyCmakeCommonArgumentList += "-DLIBSSH2_WITH_SHARED_ZLIB=$ProjectLibSsh2WithSharedZlib"
+}
+if ('ON'.Equals($ProjectLibSsh2WithZlib)) {
+    $MyCmakeCommonArgumentList += "-DLIBSSH2_WITH_ZLIB=$ProjectLibSsh2WithZlib"
+}
 if ('ON'.Equals($ProjectNetSnmpWithDisabledApps)) {
     $MyCmakeCommonArgumentList += "-DNETSNMP_WITH_DISABLED_APPS=$ProjectNetSnmpWithDisabledApps"
 }
@@ -75,6 +92,9 @@ if ('ON'.Equals($ProjectNetSnmpWithDisabledMibLoading)) {
 }
 if ('ON'.Equals($ProjectNetSnmpWithIpv6)) {
     $MyCmakeCommonArgumentList += "-DNETSNMP_WITH_IPV6=$ProjectNetSnmpWithIpv6"
+}
+if ('ON'.Equals($ProjectNetSnmpWithLibSsh2)) {
+    $MyCmakeCommonArgumentList += "-DNETSNMP_WITH_LIBSSH2=$ProjectNetSnmpWithLibSsh2"
 }
 if ('ON'.Equals($ProjectNetSnmpWithSharedLibraries)) {
     $MyCmakeCommonArgumentList += "-DNETSNMP_WITH_SHARED_LIBRARIES=$ProjectNetSnmpWithSharedLibraries"
@@ -179,9 +199,14 @@ Write-Information "[PowerShell] Project information: CMake toolset: `"$ProjectTo
 Write-Information "[PowerShell] Project information: CMake platform to build: $MyCmakePlatformToBuildListString"
 Write-Information "[PowerShell] Project information: Preferred to use OpenSSL 1.1.1: $ProjectWithOpenSSL111Preferred"
 Write-Information "[PowerShell] Project information: Preferred to use OpenSSL 3.0: $ProjectWithOpenSSL30Preferred"
+Write-Information "[PowerShell] Component information: libssh2 with disabled test apps: $ProjectLibSsh2WithDisabledTestApps"
+Write-Information "[PowerShell] Component information: libssh2 with shared libraries: $ProjectLibSsh2WithSharedLibraries"
+Write-Information "[PowerShell] Component information: libssh2 with shared Zlib: $ProjectLibSsh2WithSharedZlib"
+Write-Information "[PowerShell] Component information: libssh2 with Zlib: $ProjectLibSsh2WithZlib"
 Write-Information "[PowerShell] Component information: Net-SNMP with disabled apps: $ProjectNetSnmpWithDisabledApps"
 Write-Information "[PowerShell] Component information: Net-SNMP with disabled MIB loading: $ProjectNetSnmpWithDisabledMibLoading"
 Write-Information "[PowerShell] Component information: Net-SNMP with IPv6: $ProjectNetSnmpWithIpv6"
+Write-Information "[PowerShell] Component information: Net-SNMP with LibSSH2: $ProjectNetSnmpWithLibSsh2"
 Write-Information "[PowerShell] Component information: Net-SNMP with shared libraries: $ProjectNetSnmpWithSharedLibraries"
 Write-Information "[PowerShell] Component information: Net-SNMP with SSL: $ProjectNetSnmpWithSsl"
 Write-Information "[PowerShell] Component information: Net-SNMP with WinExtDll: $ProjectNetSnmpWithWinExtDll"

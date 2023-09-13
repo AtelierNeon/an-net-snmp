@@ -29,6 +29,7 @@ if (WIN32)
 endif ()
 
 ## Process sub-components
+add_subdirectory (source/libssh2)
 add_subdirectory (source/net-snmp)
 if (BUILD_WITH_OPENSSL_1_1_1_PREFERRED)
   add_subdirectory (source/openssl-1_1_1)

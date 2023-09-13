@@ -532,7 +532,7 @@
 #undef HAVE_LIBSRES
 
 /* Define to 1 if you have the `ssh2' library (-lssh2). */
-#undef HAVE_LIBSSH2
+#cmakedefine HAVE_LIBSSH2 ${HAVE_LIBSSH2}
 
 /* Define to 1 if you have the `ssl' library (-lssl). */
 #cmakedefine HAVE_LIBSSL ${HAVE_LIBSSL}
