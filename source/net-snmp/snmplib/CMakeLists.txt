@@ -75,7 +75,6 @@ set (NETSNMP_NETSNMPLIB_SRCS
     strtoull.c
     system.c
     tools.c
-    #transports/snmpAAL5PVCDomain.c
     transports/snmpAliasDomain.c
     transports/snmpCallbackDomain.c
     transports/snmpIPv4BaseDomain.c
@@ -106,6 +105,7 @@ if (UNIX)
     if (NOT APPLE)
         set (NETSNMP_NETSNMPLIB_SRCS
             ${NETSNMP_NETSNMPLIB_SRCS}
+            #transports/snmpAAL5PVCDomain.c
             transports/snmpIPXDomain.c)
     endif ()
 endif ()
