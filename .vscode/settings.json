@@ -2,6 +2,8 @@
     "cmake.buildDirectory": "${workspaceFolder}/build/vscode",
     "cmake.sourceDirectory": "${workspaceFolder}",
     "cmake.configureSettings": {
+        "LIBSSH2_WITH_DISABLED_TEST_APPS": "ON",
+        "LIBSSH2_WITH_ZLIB": "ON",
         "NETSNMP_WITH_DISABLED_APPS": "OFF",
         "NETSNMP_WITH_DISABLED_MIB_LOADING": "OFF",
         "NETSNMP_WITH_IPV6": "ON",
