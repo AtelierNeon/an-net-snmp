@@ -2,17 +2,17 @@
     "cmake.buildDirectory": "${workspaceFolder}/build/vscode",
     "cmake.sourceDirectory": "${workspaceFolder}",
     "cmake.configureSettings": {
-        "LIBSSH2_WITH_DISABLED_TEST_APPS": "ON",
         "LIBSSH2_WITH_ZLIB": "ON",
-        "NETSNMP_WITH_DISABLED_APPS": "OFF",
-        "NETSNMP_WITH_DISABLED_MIB_LOADING": "OFF",
+        "LIBSSH2_WITHOUT_TEST_APPS": "ON",
         "NETSNMP_WITH_IPV6": "ON",
         "NETSNMP_WITH_LIBSSH2": "ON",
         "NETSNMP_WITH_SSL": "ON",
         "NETSNMP_WITH_WINEXTDLL": "OFF",
+        "NETSNMP_WITHOUT_APPS": "OFF",
+        "NETSNMP_WITHOUT_MIB_LOADING": "OFF",
         "OPENSSL_WITH_DEPRECATED_CIPHERS": "ON",
-        "OPENSSL_WITH_DISABLED_APPS": "ON",
         "OPENSSL_WITH_ZLIB": "ON",
-        "ZLIB_WITH_DISABLED_TEST_APPS": "ON"
+        "OPENSSL_WITHOUT_APPS": "ON",
+        "ZLIB_WITHOUT_TEST_APPS": "ON"
     }
 }

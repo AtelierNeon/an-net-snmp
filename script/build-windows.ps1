@@ -46,23 +46,23 @@ $ProjectWithWorkaroundSpectre = if ($Env:MY_PROJECT_WITH_WORKAROUND_SPECTRE) {$E
 ####
 #### Project component level config
 ####
-$ProjectLibSsh2WithDisabledTestApps = if ($Env:MY_PROJECT_LIBSSH2_WITH_DISABLED_TEST_APPS) {$Env:MY_PROJECT_LIBSSH2_WITH_DISABLED_TEST_APPS} else {'OFF'}
 $ProjectLibSsh2WithSharedLibraries = if ($Env:MY_PROJECT_LIBSSH2_WITH_SHARED_LIBRARIES) {$Env:MY_PROJECT_LIBSSH2_WITH_SHARED_LIBRARIES} else {'OFF'}
 $ProjectLibSsh2WithSharedZlib = if ($Env:MY_PROJECT_LIBSSH2_WITH_SHARED_ZLIB) {$Env:MY_PROJECT_LIBSSH2_WITH_SHARED_ZLIB} else {'OFF'}
 $ProjectLibSsh2WithZlib = if ($Env:MY_PROJECT_LIBSSH2_WITH_ZLIB) {$Env:MY_PROJECT_LIBSSH2_WITH_ZLIB} else {'OFF'}
-$ProjectNetSnmpWithDisabledApps = if ($Env:MY_PROJECT_NETSNMP_WITH_DISABLED_APPS) {$Env:MY_PROJECT_NETSNMP_WITH_DISABLED_APPS} else {'OFF'}
-$ProjectNetSnmpWithDisabledMibLoading = if ($Env:MY_PROJECT_NETSNMP_WITH_DISABLED_MIB_LOADING) {$Env:MY_PROJECT_NETSNMP_WITH_DISABLED_MIB_LOADING} else {'OFF'}
+$ProjectLibSsh2WithoutTestApps = if ($Env:MY_PROJECT_LIBSSH2_WITHOUT_TEST_APPS) {$Env:MY_PROJECT_LIBSSH2_WITHOUT_TEST_APPS} else {'OFF'}
 $ProjectNetSnmpWithIpv6 = if ($Env:MY_PROJECT_NETSNMP_WITH_IPV6) {$Env:MY_PROJECT_NETSNMP_WITH_IPV6} else {'OFF'}
 $ProjectNetSnmpWithLibSsh2 = if ($Env:MY_PROJECT_NETSNMP_WITH_LIBSSH2) {$Env:MY_PROJECT_NETSNMP_WITH_LIBSSH2} else {'OFF'}
 $ProjectNetSnmpWithSharedLibraries = if ($Env:MY_PROJECT_NETSNMP_WITH_SHARED_LIBRARIES) {$Env:MY_PROJECT_NETSNMP_WITH_SHARED_LIBRARIES} else {'OFF'}
 $ProjectNetSnmpWithSsl = if ($Env:MY_PROJECT_NETSNMP_WITH_SSL) {$Env:MY_PROJECT_NETSNMP_WITH_SSL} else {'OFF'}
 $ProjectNetSnmpWithWinExtDll = if ($Env:MY_PROJECT_NETSNMP_WITH_WINEXTDLL) {$Env:MY_PROJECT_NETSNMP_WITH_WINEXTDLL} else {'OFF'}
+$ProjectNetSnmpWithoutApps = if ($Env:MY_PROJECT_NETSNMP_WITHOUT_APPS) {$Env:MY_PROJECT_NETSNMP_WITHOUT_APPS} else {'OFF'}
+$ProjectNetSnmpWithoutMibLoading = if ($Env:MY_PROJECT_NETSNMP_WITHOUT_MIB_LOADING) {$Env:MY_PROJECT_NETSNMP_WITHOUT_MIB_LOADING} else {'OFF'}
 $ProjectOpenSslWithDeprecatedCiphers = if ($Env:MY_PROJECT_OPENSSL_WITH_DEPRECATED_CIPHERS) {$Env:MY_PROJECT_OPENSSL_WITH_DEPRECATED_CIPHERS} else {'OFF'}
-$ProjectOpenSslWithDisabledApps = if ($Env:MY_PROJECT_OPENSSL_WITH_DISABLED_APPS) {$Env:MY_PROJECT_OPENSSL_WITH_DISABLED_APPS} else {'OFF'}
 $ProjectOpenSslWithSharedLibraries = if ($Env:MY_PROJECT_OPENSSL_WITH_SHARED_LIBRARIES) {$Env:MY_PROJECT_OPENSSL_WITH_SHARED_LIBRARIES} else {'OFF'}
 $ProjectOpenSslWithSharedZlib = if ($Env:MY_PROJECT_OPENSSL_WITH_SHARED_ZLIB) {$Env:MY_PROJECT_OPENSSL_WITH_SHARED_ZLIB} else {'OFF'}
 $ProjectOpenSslWithZlib = if ($Env:MY_PROJECT_OPENSSL_WITH_ZLIB) {$Env:MY_PROJECT_OPENSSL_WITH_ZLIB} else {'OFF'}
-$ProjectZlibWithDisabledTestApps = if ($Env:MY_PROJECT_ZLIB_WITH_DISABLED_TEST_APPS) {$Env:MY_PROJECT_ZLIB_WITH_DISABLED_TEST_APPS} else {'OFF'}
+$ProjectOpenSslWithoutApps = if ($Env:MY_PROJECT_OPENSSL_WITHOUT_APPS) {$Env:MY_PROJECT_OPENSSL_WITHOUT_APPS} else {'OFF'}
+$ProjectZlibWithoutTestApps = if ($Env:MY_PROJECT_ZLIB_WITHOUT_TEST_APPS) {$Env:MY_PROJECT_ZLIB_WITHOUT_TEST_APPS} else {'OFF'}
 
 ##
 ## My variables
@@ -72,9 +72,6 @@ $MyCmakeCommonArgumentList = @(
         "-T $ProjectToolset",
         "-DMY_REVISION=$ProjectRevision"
 )
-if ('ON'.Equals($ProjectLibSsh2WithDisabledTestApps)) {
-    $MyCmakeCommonArgumentList += "-DLIBSSH2_WITH_DISABLED_TEST_APPS=$ProjectLibSsh2WithDisabledTestApps"
-}
 if ('ON'.Equals($ProjectLibSsh2WithSharedLibraries)) {
     $MyCmakeCommonArgumentList += "-DLIBSSH2_WITH_SHARED_LIBRARIES=$ProjectLibSsh2WithSharedLibraries"
 }
@@ -84,11 +81,8 @@ if ('ON'.Equals($ProjectLibSsh2WithSharedZlib)) {
 if ('ON'.Equals($ProjectLibSsh2WithZlib)) {
     $MyCmakeCommonArgumentList += "-DLIBSSH2_WITH_ZLIB=$ProjectLibSsh2WithZlib"
 }
-if ('ON'.Equals($ProjectNetSnmpWithDisabledApps)) {
-    $MyCmakeCommonArgumentList += "-DNETSNMP_WITH_DISABLED_APPS=$ProjectNetSnmpWithDisabledApps"
-}
-if ('ON'.Equals($ProjectNetSnmpWithDisabledMibLoading)) {
-    $MyCmakeCommonArgumentList += "-DNETSNMP_WITH_DISABLED_MIB_LOADING=$ProjectNetSnmpWithDisabledMibLoading"
+if ('ON'.Equals($ProjectLibSsh2WithoutTestApps)) {
+    $MyCmakeCommonArgumentList += "-DLIBSSH2_WITHOUT_TEST_APPS=$ProjectLibSsh2WithoutTestApps"
 }
 if ('ON'.Equals($ProjectNetSnmpWithIpv6)) {
     $MyCmakeCommonArgumentList += "-DNETSNMP_WITH_IPV6=$ProjectNetSnmpWithIpv6"
@@ -105,11 +99,14 @@ if ('ON'.Equals($ProjectNetSnmpWithSsl)) {
 if ('ON'.Equals($ProjectNetSnmpWithWinExtDll)) {
     $MyCmakeCommonArgumentList += "-DNETSNMP_WITH_WINEXTDLL=$ProjectNetSnmpWithWinExtDll"
 }
+if ('ON'.Equals($ProjectNetSnmpWithoutApps)) {
+    $MyCmakeCommonArgumentList += "-DNETSNMP_WITHOUT_APPS=$ProjectNetSnmpWithoutApps"
+}
+if ('ON'.Equals($ProjectNetSnmpWithoutMibLoading)) {
+    $MyCmakeCommonArgumentList += "-DNETSNMP_WITHOUT_MIB_LOADING=$ProjectNetSnmpWithoutMibLoading"
+}
 if ('ON'.Equals($ProjectOpenSslWithDeprecatedCiphers)) {
     $MyCmakeCommonArgumentList += "-DOPENSSL_WITH_DEPRECATED_CIPHERS=$ProjectOpenSslWithDeprecatedCiphers"
-}
-if ('ON'.Equals($ProjectOpenSslWithDisabledApps)) {
-    $MyCmakeCommonArgumentList += "-DOPENSSL_WITH_DISABLED_APPS=$ProjectOpenSslWithDisabledApps"
 }
 if ('ON'.Equals($ProjectOpenSslWithSharedLibraries)) {
     $MyCmakeCommonArgumentList += "-DOPENSSL_WITH_SHARED_LIBRARIES=$ProjectOpenSslWithSharedLibraries"
@@ -120,8 +117,11 @@ if ('ON'.Equals($ProjectOpenSslWithSharedZlib)) {
 if ('ON'.Equals($ProjectOpenSslWithZlib)) {
     $MyCmakeCommonArgumentList += "-DOPENSSL_WITH_ZLIB=$ProjectOpenSslWithZlib"
 }
-if ('ON'.Equals($ProjectZlibWithDisabledTestApps)) {
-    $MyCmakeCommonArgumentList += "-DZLIB_WITH_DISABLED_TEST_APPS=$ProjectZlibWithDisabledTestApps"
+if ('ON'.Equals($ProjectOpenSslWithoutApps)) {
+    $MyCmakeCommonArgumentList += "-DOPENSSL_WITHOUT_APPS=$ProjectOpenSslWithoutApps"
+}
+if ('ON'.Equals($ProjectZlibWithoutTestApps)) {
+    $MyCmakeCommonArgumentList += "-DZLIB_WITHOUT_TEST_APPS=$ProjectZlibWithoutTestApps"
 }
 if ('ON'.Equals($ProjectWithOpenSSL111Preferred)) {
     $MyCmakeCommonArgumentList += "-DBUILD_WITH_OPENSSL_1_1_1_PREFERRED=$ProjectWithOpenSSL111Preferred"
@@ -199,23 +199,23 @@ Write-Information "[PowerShell] Project information: CMake toolset: `"$ProjectTo
 Write-Information "[PowerShell] Project information: CMake platform to build: $MyCmakePlatformToBuildListString"
 Write-Information "[PowerShell] Project information: Preferred to use OpenSSL 1.1.1: $ProjectWithOpenSSL111Preferred"
 Write-Information "[PowerShell] Project information: Preferred to use OpenSSL 3.0: $ProjectWithOpenSSL30Preferred"
-Write-Information "[PowerShell] Component information: libssh2 with disabled test apps: $ProjectLibSsh2WithDisabledTestApps"
 Write-Information "[PowerShell] Component information: libssh2 with shared libraries: $ProjectLibSsh2WithSharedLibraries"
 Write-Information "[PowerShell] Component information: libssh2 with shared Zlib: $ProjectLibSsh2WithSharedZlib"
 Write-Information "[PowerShell] Component information: libssh2 with Zlib: $ProjectLibSsh2WithZlib"
-Write-Information "[PowerShell] Component information: Net-SNMP with disabled apps: $ProjectNetSnmpWithDisabledApps"
-Write-Information "[PowerShell] Component information: Net-SNMP with disabled MIB loading: $ProjectNetSnmpWithDisabledMibLoading"
+Write-Information "[PowerShell] Component information: libssh2 without test apps: $ProjectLibSsh2WithoutTestApps"
 Write-Information "[PowerShell] Component information: Net-SNMP with IPv6: $ProjectNetSnmpWithIpv6"
 Write-Information "[PowerShell] Component information: Net-SNMP with LibSSH2: $ProjectNetSnmpWithLibSsh2"
 Write-Information "[PowerShell] Component information: Net-SNMP with shared libraries: $ProjectNetSnmpWithSharedLibraries"
 Write-Information "[PowerShell] Component information: Net-SNMP with SSL: $ProjectNetSnmpWithSsl"
 Write-Information "[PowerShell] Component information: Net-SNMP with WinExtDll: $ProjectNetSnmpWithWinExtDll"
+Write-Information "[PowerShell] Component information: Net-SNMP without apps: $ProjectNetSnmpWithoutApps"
+Write-Information "[PowerShell] Component information: Net-SNMP without MIB loading: $ProjectNetSnmpWithoutMibLoading"
 Write-Information "[PowerShell] Component information: OpenSSL with deprecated ciphers: $ProjectOpenSslWithDeprecatedCiphers"
-Write-Information "[PowerShell] Component information: OpenSSL with disabled apps: $ProjectOpenSslWithDisabledApps"
 Write-Information "[PowerShell] Component information: OpenSSL with shared libraries: $ProjectOpenSslWithSharedLibraries"
 Write-Information "[PowerShell] Component information: OpenSSL with shared Zlib: $ProjectOpenSslWithSharedZlib"
 Write-Information "[PowerShell] Component information: OpenSSL with Zlib: $ProjectOpenSslWithZlib"
-Write-Information "[PowerShell] Component information: Zlib with disabled test apps: $ProjectZlibWithDisabledTestApps"
+Write-Information "[PowerShell] Component information: OpenSSL without apps: $ProjectOpenSslWithoutApps"
+Write-Information "[PowerShell] Component information: Zlib without test apps: $ProjectZlibWithoutTestApps"
 
 
 

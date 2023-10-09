@@ -6,8 +6,8 @@ project (netsnmp
     DESCRIPTION "Net-SNMP")
 
 ## Project options
-option (NETSNMP_WITH_DISABLED_APPS "Build Net-SNMP with disabled apps." OFF)
-option (NETSNMP_WITH_DISABLED_MIB_LOADING "Build Net-SNMP with disabled MIB loading." OFF)
+option (NETSNMP_WITHOUT_APPS "Build Net-SNMP with disabled apps." OFF)
+option (NETSNMP_WITHOUT_MIB_LOADING "Build Net-SNMP with disabled MIB loading." OFF)
 option (NETSNMP_WITH_IPV6 "Build Net-SNMP with IPv6 transports." OFF)
 option (NETSNMP_WITH_LIBSSH2 "Build Net-SNMP with libssh2." OFF)
 option (NETSNMP_WITH_SDK "Build Net-SNMP with Microsoft Platform SDK." ON)
@@ -51,7 +51,7 @@ if (UNIX)
         set (CMAKE_CXX_FLAGS "-Wno-format-truncation ${CMAKE_CXX_FLAGS}")
     endif ()
 endif ()
-if (NETSNMP_WITH_DISABLED_MIB_LOADING)
+if (NETSNMP_WITHOUT_MIB_LOADING)
     add_definitions(
         -DNETSNMP_DISABLE_MIB_LOADING)
 endif ()
@@ -275,7 +275,7 @@ install (FILES ${PUBLIC_SHARE_SNMP_SNMPCONF_DATA_SNMPTRAPD_DATA} DESTINATION sha
 
 ## Process sub-components
 add_subdirectory (agent)
-if (NOT NETSNMP_WITH_DISABLED_APPS)
+if (NOT NETSNMP_WITHOUT_APPS)
     add_subdirectory (apps)
 endif()
 add_subdirectory (snmplib)
